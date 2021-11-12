@@ -1,36 +1,98 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-		<title>注册-学生综合素质评价微系统(SCE)</title>
-    </head>
-    <body>
-        <h1>SCE用户注册</h1>
+
+<head>
+    <meta charset="utf-8">
+    <title>注册-学生综合素质评价微系统(SCE)</title>
+    <link rel="stylesheet" href="..\css\reg.css">
+</head>
+
+<body>
+    <h1>SCE系统 用户注册</h1>
+    <div class="main">
         <form action="#">
-            <div>
-                学号：<input type="text">
-            </div>
-            <div>
-                姓名：<input type="text">
-            </div>
-            <div>
-                专业班级：
-                <select name="clstxt" id="cls">
-                    <option value="bmc">工商管理类</option>
-                    <option value="bm">工商管理</option>
-                    <option value="ac">会计</option>
-                    <option value="mis">信管</option>
-                </select>
-            </div>
-            <div>
-                密码：<input type='password'>
-            </div>
-            <div>
-                确认密码：<input type="password">
-            </div>
-            <div>
-                <input type="submit">
-            </div>
+            <table>
+                <tr>
+                    <td>
+                        <div class="infotext"> 学号：</div>
+                    </td>
+                    <td>
+                        <input type="text" class="info" size="30px"/>
+                    </td>
+                    <td class="tips">
+                        这是一个提示。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="infotext"> 姓名：</div>
+                    </td>
+                    <td>
+                        <input type="text" class="info" size="30px"/>
+                    </td>
+                    <td class="tips">
+                        这是一个提示。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="infotext">专业班级：</div>
+                    </td>
+                    <td>
+                        <select name="mjtxt" id="mj" class="info" >
+                            <option value="bmc">工商管理类</option>
+                            <option value="bm">工商管理</option>
+                            <option value="ac">会计</option>
+                            <option value="mis">信管</option>
+                        </select>
+                        <select name="yrtxt" id="yr" class="info" >
+                            <option value="21">21</option>
+                            <option value="20">20</option>
+                            <option value="19">19</option>
+                            <option value="18">18</option>
+                        </select>
+                        <select name="cltxt" id="cl" class="info" >
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                        </select>
+                    </td>
+                    <td class="tips">
+                        这是一个提示。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="infotext">密码：</div>
+                    </td>
+                    <td>
+                        <input type='password' class="info" size="30px"/>
+                    </td>
+                    <td class="tips">
+                        这是一个提示。
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="infotext">确认密码：</div>
+                    </td>
+                    <td>
+                        <input type='password' class="info" size="30px"/>
+                    </td>
+                    <td class="tips">
+                        这是一个提示。
+                    </td>
+                </tr>
+            </table>
+            <div class="obtn"><input type="submit" class="btn"></div>
         </form>
-    </body>
+    </div>
+    <footer>
+        <a href="#">关于&nbsp;</a>
+        &nbsp;|&nbsp;
+        <a href="#">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
+    </footer>
+</body>
+
 </html>

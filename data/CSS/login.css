@@ -1,0 +1,113 @@
+body{
+    margin: 0;
+    background-image: url(../img/background.JPG);
+    background-size:cover;
+    color: #333;
+}
+
+.glass{
+    background-color: rgba(255, 255, 255, 0.3);
+backdrop-filter: blur(6.5px);
+-webkit-backdrop-filter: blur(6.5px);
+border: 1px solid rgba(255, 255, 255, 0.18);
+box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+-webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+border-radius: 25px;
+-webkit-border-radius: 25px;
+}
+
+#title{
+    margin: auto;
+	height: 60px;
+	margin-top: 100px;
+	margin-bottom: 120px;
+	text-align: center;
+	width: 500px;
+    height: 80px;
+    line-height: 40px;
+}
+
+#main{
+    min-width: fit-content;
+	max-width: 500px;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 50px;
+	padding-bottom:1em;
+    margin: auto;
+}
+
+input{
+    border: 0;
+	height: 30px;
+	text-indent: 1em;
+	margin-left: auto;
+    margin-bottom: 15px;
+    background-color: rgba(120, 120, 120, 0.4);
+backdrop-filter: blur(6.5px);
+-webkit-backdrop-filter: blur(6.5px);
+border: 1px solid rgba(255, 255, 255, 0.18);
+box-shadow: rgba(14, 14, 14, 0.19) 0px 6px 15px 0px;
+-webkit-box-shadow: rgba(14, 14, 14, 0.19) 0px 6px 15px 0px;
+border-radius: 25px;
+-webkit-border-radius: 25px;
+color: rgb(128, 128, 128);
+}
+
+.info{
+    height: 40px;
+	font-size: 20px;
+}
+
+img{
+    padding-bottom: 6px;
+}
+
+input.btn{
+    backdrop-filter: blur(6.5px);
+-webkit-backdrop-filter: blur(6.5px);
+border: 1px solid rgba(255, 255, 255, 0.18);
+box-shadow: rgba(100, 100, 100, 0.8) 0px 6px 15px 0px;
+-webkit-box-shadow: rgba(100, 100, 100, 0.8) 0px 6px 15px 0px;
+border-radius: 25px;
+-webkit-border-radius: 25px;
+color: #333;
+height: 40px;
+width: 80px;
+font-size: 16px;
+padding-right: 15px;
+padding-left: 0;
+margin-top: 10px;
+display: inline-block;
+}
+
+input.btn:active{
+    backdrop-filter: blur(6.5px);
+    -webkit-backdrop-filter: blur(6.5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    box-shadow: rgba(100, 100, 100, 0.8) 0px 0px 0px 0px;
+-webkit-box-shadow: rgba(100, 100, 100, 0.8) 0px 0px 0px 0px;
+}
+
+table{
+    border-spacing : 20px;
+}
+
+footer>a{
+    font-size: 14px;
+    color: #333;
+}
+
+footer{
+    margin-top: 200px;
+    font-size: 12px;
+    text-align: center;
+    color: #333;
+}
+
+.tips{
+	font-size: 10px;
+	color: rgb(125,125,125);
+}

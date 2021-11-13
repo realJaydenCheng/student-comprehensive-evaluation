@@ -86,9 +86,7 @@ h1 {
     border-radius: 43px;
     -webkit-border-radius: 43px;
 	border: 0;
-	height: 40px;
-	width: 80px;
-    font-size: 15px;
+    font-size: 15.5px;
 }
 
 .obtn {
@@ -106,4 +104,9 @@ footer{
 footer>a{
     font-size: 14px;
     color:rgb(192, 192, 192);
+}
+
+.tips{
+	font-size: 10px;
+	color: rgb(125,125,125);
 }

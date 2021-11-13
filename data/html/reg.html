@@ -17,10 +17,10 @@
                         <div class="infotext"> 学号：</div>
                     </td>
                     <td>
-                        <input type="text" class="info" size="30px"/>
+                        <input type="text" name="codetxt" class="info" size="30px"/>
                     </td>
                     <td class="tips">
-                        这是一个提示。
+                        请输入012开头的13位学号。
                     </td>
                 </tr>
                 <tr>
@@ -28,10 +28,10 @@
                         <div class="infotext"> 姓名：</div>
                     </td>
                     <td>
-                        <input type="text" class="info" size="30px"/>
+                        <input type="text" name="nametxt" class="info" size="30px"/>
                     </td>
                     <td class="tips">
-                        这是一个提示。
+                        请输入您在教务系统中的姓名。
                     </td>
                 </tr>
                 <tr>
@@ -44,6 +44,11 @@
                             <option value="bm">工商管理</option>
                             <option value="ac">会计</option>
                             <option value="mis">信管</option>
+                            <option value="gj">工商gj</option>
+                            <option value="acca">会计ACCA</option>
+                            <option value="fm">财务管理</option>
+                            <option value="hr">人力资源</option>
+                            <option value="mk">市场营销</option>
                         </select>
                         <select name="yrtxt" id="yr" class="info" >
                             <option value="21">21</option>
@@ -55,11 +60,19 @@
                             <option value="01">01</option>
                             <option value="02">02</option>
                             <option value="03">03</option>
-                            <option value="04">04</option>
+                            <option value="04">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
                         </select>
                     </td>
                     <td class="tips">
-                        这是一个提示。
+                        请选择您的专业、年级和班级。
                     </td>
                 </tr>
                 <tr>
@@ -67,10 +80,10 @@
                         <div class="infotext">密码：</div>
                     </td>
                     <td>
-                        <input type='password' class="info" size="30px"/>
+                        <input type='password' name="pwdtxt" class="info" size="30px"/>
                     </td>
                     <td class="tips">
-                        这是一个提示。
+                        请输入您的8位以上密码。
                     </td>
                 </tr>
                 <tr>
@@ -81,7 +94,7 @@
                         <input type='password' class="info" size="30px"/>
                     </td>
                     <td class="tips">
-                        这是一个提示。
+                        请再次输入密码确保无误。
                     </td>
                 </tr>
             </table>
@@ -91,7 +104,7 @@
     <footer>
         <a href="#">关于&nbsp;</a>
         &nbsp;|&nbsp;
-        <a href="#">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
+        <a href="license.html">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
     </footer>
 </body>
 

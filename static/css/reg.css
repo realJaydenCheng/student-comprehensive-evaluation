@@ -32,6 +32,9 @@ h1 {
 	-webkit-box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
 	border-radius: 43px;
 	-webkit-border-radius: 43px;
+	font-family: 'Times New Roman','等线','黑体';
+	font-weight: normal;
+	text-align:center;
 }
 
 .info {

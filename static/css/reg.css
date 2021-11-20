@@ -4,37 +4,12 @@ body {
     color: rgb(31,16,19);
 }
 
-.main {
-	margin: 0 auto;
-	background-color: rgb(224, 229, 236);
-	box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
-	-webkit-box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
-	border-radius: 43px;
-	-webkit-border-radius: 43px;
-	min-width: fit-content;
-	max-width: 500px;
-	padding-left: 50px;
-	padding-right: 50px;
-	padding-top: 50px;
-	padding-bottom: 50px;
+.main{
+	width: fit-content;
 }
 
-h1 {
-	margin: auto;
-	height: 60px;
-	margin-top: 50px;
-	margin-bottom: 75px;
-	text-align: center;
-	width: 500px;
-    line-height: 60px;
-	background-color: rgb(224, 229, 236);
-	box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
-	-webkit-box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
-	border-radius: 43px;
-	-webkit-border-radius: 43px;
-	font-family: 'Times New Roman','等线','黑体';
-	font-weight: normal;
-	text-align:center;
+#table{
+	margin:auto;
 }
 
 .info {
@@ -45,18 +20,20 @@ h1 {
 	-webkit-border-radius: 10px;
 	border: 0;
 	height: 30px;
-	text-indent: 1em;
+	text-align: center;
 	margin-left: auto;
 }
 
 .infotext {
 	height: 40px;
-	font-size: 20px;
+	line-height: 40px;
+	font-size: 16px;
 }
 
 .tips{
     font-size: 12px;
-    text-indent: 1.5em;
+    text-align: right;
+	width: 200px;
 }
 
 #mj {
@@ -80,6 +57,7 @@ h1 {
 	height: 40px;
 	width: 80px;
     font-size: 16px;
+	margin: 0 50px;
 }
 
 .btn:active {
@@ -93,8 +71,9 @@ h1 {
 }
 
 .obtn {
-	margin-left: 30%;
+	margin: 0 auto;
 	margin-top: 30px;
+	text-align: center;
 }
 
 footer{

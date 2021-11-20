@@ -3,58 +3,55 @@
     <head>
         <meta charset="utf-8">
         <title>登录-学生综合素质评价微系统(SCE)</title>
-        <link rel="stylesheet" href="../css/login.css">
+        <link rel="stylesheet" href="../static/css/login.css"> 
     </head>
     <body>
-        <div class="glass" id="title">
-            <h1>SCE系统 用户登录</h1>
+        <nav>
+            <img src="../static/img/logo.png" alt="学生综合素质评价微系统"  title="学生综合素质评价微系统" width="142px">
+            <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="./reg.html">用户注册</a></span>
+        </nav>
+        <div id="main">
+            <div id="slogan">
+                <span class="slogan">落实立德树人</span>
+                <span class="slogan">发展教育强国</span>
+                <span class="slogan">学生综合素质评价微系统</span>
+            </div>
+            <div class="glass" id="log">
+                <h1>用户登录</h1>
+                <form action="#">
+                    <table>
+                        <tr>
+                            <td class="img">
+                                <img src="../static/img/user_s.png" alt="code" width="18">
+                            </td>
+                            <td>
+                                <input type="text" class="info" name="codetxt" placeholder="请输入学号">
+                            </td>
+                            <td class="tips"> 
+                                请输入012开头的13位学号。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="img">
+                                <img src="../static/img/pwd_s.png" alt="pwd" width="18">
+                            </td>
+                            <td>
+                                <input class="info" type="password" name="pwdtxt" placeholder="请输入密码">
+                            </td>
+                            <td class="tips">
+                                请输入您的8位以上密码。
+                            </td>
+                        </tr>                    
+                    </table>
+                    <div class="obtn">
+                        <input type="submit" class="btn" value="登&nbsp;录"> 
+                        <input type="button" class="btn" value="注&nbsp;册" onclick="location.href='./reg.html'">
+                    </div>
+                    
+                </form>
+            </div>
         </div>
-        <div class="glass" id="main">
-            <form action="#">
-                <table>
-                    <tr>
-                        <td>
-                            <img src="../img/user_s.png" alt="code" width="18">
-                        </td>
-                        <td>
-                            <div class="info">学号：</div>
-                        </td>
-                        <td>
-                            <input type="text" name="codetxt">
-                        </td>
-                        <td class="tips">
-                            请输入012开头的13位学号。
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="../img/pwd_s.png" alt="pwd" width="18">
-                        </td>
-                        <td>
-                            <div class="info">密码：</div>  
-                        </td>
-                        <td>
-                            <input type="password" name="pwdtxt">
-                        </td>
-                        <td class="tips">
-                            请输入您的8位以上密码。
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <input type="submit" class="btn" > 
-                        </td>
-                        <td>
-                            <input type="button" class="btn" value="注册" onclick="location.href='./reg.html'">
-                        </td>
-                    </tr>
-                </table>
-                
-                
-            </form>
-        </div>
+        
         <footer>
             <a href="#">关于&nbsp;</a>
             &nbsp;|&nbsp;

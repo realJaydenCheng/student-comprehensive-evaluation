@@ -1,113 +1,149 @@
-body{
-    margin: 0;
-    background-image: url(../img/background.JPG);
-    background-size:cover;
-    color: #333;
+h1 {
+	margin: 0;
+	padding: 0;
+	margin-bottom: 23px;
 }
 
-.glass{
-    background-color: rgba(255, 255, 255, 0.3);
-backdrop-filter: blur(6.5px);
--webkit-backdrop-filter: blur(6.5px);
-border: 1px solid rgba(255, 255, 255, 0.18);
-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
--webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
-border-radius: 25px;
--webkit-border-radius: 25px;
+body {
+	margin: 0;
+	background-image: url(../img/login.jpeg);
+	background-size: cover;
+	color: #333;
+	font-family: "等线","微软雅黑","黑体";
 }
 
-#title{
-    margin: auto;
+nav {
+	display: block;
+	height: 50px;
+	width: 1250px;
+	margin: 0 auto;
+	line-height: 50px;
+}
+
+#top {
+	display: inline;
+	text-align: right;
+	margin-left: 65%;
+	line-height: 50px;
+}
+
+.glass {
+	background-color: rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(6.5px);
+	-webkit-backdrop-filter: blur(6.5px);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+	-webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+	border-radius: 25px;
+	-webkit-border-radius: 25px;
+}
+
+#main {
+	width: 1250px;
+	margin: 0 auto;
+	margin-bottom: 200px;
+}
+
+#slogan {
+	float: left;
+	margin-top: 45px;
+}
+
+span.slogan {
+	display: block;
+	font-size: 37px;
 	height: 60px;
-	margin-top: 100px;
-	margin-bottom: 120px;
-	text-align: center;
-	width: 500px;
-    height: 80px;
-    line-height: 40px;
 }
 
-#main{
-    min-width: fit-content;
-	max-width: 500px;
-	padding-left: 50px;
-	padding-right: 50px;
-	padding-top: 50px;
-	padding-bottom:1em;
-    margin: auto;
+#log {
+	width: 425px;
+	padding: 25px;
+	margin-left: 760px;
+	margin-top: 240px;
 }
 
-input{
-    border: 0;
+input {
+	border: 0;
 	height: 30px;
 	text-indent: 1em;
 	margin-left: auto;
-    margin-bottom: 15px;
-    background-color: rgba(120, 120, 120, 0.4);
-backdrop-filter: blur(6.5px);
--webkit-backdrop-filter: blur(6.5px);
-border: 1px solid rgba(255, 255, 255, 0.18);
-box-shadow: rgba(14, 14, 14, 0.19) 0px 6px 15px 0px;
--webkit-box-shadow: rgba(14, 14, 14, 0.19) 0px 6px 15px 0px;
-border-radius: 25px;
--webkit-border-radius: 25px;
-color: rgb(128, 128, 128);
+	margin-bottom: 20px;
+	background-color: rgba(120, 120, 120, 0.4);
+	backdrop-filter: blur(6.5px);
+	-webkit-backdrop-filter: blur(6.5px);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	box-shadow: rgba(14, 14, 14, 0.19) 0px 6px 15px 0px;
+	-webkit-box-shadow: rgba(14, 14, 14, 0.19) 0px 6px 15px 0px;
+	border-radius: 25px;
+	-webkit-border-radius: 25px;
+	color: rgb(128, 128, 128);
 }
 
-.info{
-    height: 40px;
-	font-size: 20px;
+td.img {
+	display: block;
+	padding-top: 8px;
 }
 
-img{
-    padding-bottom: 6px;
+.info {
+	width: 200px;
 }
 
-input.btn{
-    backdrop-filter: blur(6.5px);
--webkit-backdrop-filter: blur(6.5px);
-border: 1px solid rgba(255, 255, 255, 0.18);
-box-shadow: rgba(100, 100, 100, 0.8) 0px 6px 15px 0px;
--webkit-box-shadow: rgba(100, 100, 100, 0.8) 0px 6px 15px 0px;
-border-radius: 25px;
--webkit-border-radius: 25px;
-color: #333;
-height: 40px;
-width: 80px;
-font-size: 16px;
-padding-right: 15px;
-padding-left: 0;
-margin-top: 10px;
-display: inline-block;
+input.btn {
+	backdrop-filter: blur(6.5px);
+	-webkit-backdrop-filter: blur(6.5px);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	box-shadow: rgba(100, 100, 100, 0.8) 0px 6px 15px 0px;
+	-webkit-box-shadow: rgba(100, 100, 100, 0.8) 0px 6px 15px 0px;
+	border-radius: 25px;
+	-webkit-border-radius: 25px;
+	color: #333;
+	height: 40px;
+	width: 80px;
+	font-size: 16px;
+	padding-right: 15px;
+	padding-left: 0;
+	margin-top: 10px;
+	display: inline-block;
 }
 
-input.btn:active{
-    backdrop-filter: blur(6.5px);
-    -webkit-backdrop-filter: blur(6.5px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 25px;
-    -webkit-border-radius: 25px;
-    box-shadow: rgba(100, 100, 100, 0.8) 0px 0px 0px 0px;
--webkit-box-shadow: rgba(100, 100, 100, 0.8) 0px 0px 0px 0px;
+input.btn:active {
+	backdrop-filter: blur(6.5px);
+	-webkit-backdrop-filter: blur(6.5px);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	border-radius: 25px;
+	-webkit-border-radius: 25px;
+	box-shadow: rgba(100, 100, 100, 0.8) 0px 0px 0px 0px;
+	-webkit-box-shadow: rgba(100, 100, 100, 0.8) 0px 0px 0px 0px;
 }
 
-table{
-    border-spacing : 20px;
+table {
+	border-spacing: 5px;
 }
 
-footer>a{
-    font-size: 14px;
-    color: #555;
+.btn {
+	margin: 0 50px;
 }
 
-footer{
-    margin-top: 200px;
-    font-size: 12px;
-    text-align: center;
-    color: #555;
+.obtn {
+	margin: 0 auto;
+	text-align: center;
 }
 
-.tips{
+footer>a {
+	font-size: 14px;
+	color: #555;
+}
+
+footer {
+	margin-top: 300px;
+	font-size: 12px;
+	text-align: center;
+	color: #555;
+}
+
+.tips {
 	font-size: 10px;
 	color: rgb(125,125,125);
+	text-align: right;
+	width: 167px;
 }

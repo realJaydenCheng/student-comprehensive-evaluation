@@ -10,20 +10,20 @@
 
 <body>
     <nav>
-        <img src="../static/img/logo.png" alt="学生综合素质评价微系统"  title="学生综合素质评价微系统" width="142px">
-        <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="./reg.html">返回首页</a></span>
+        <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px">
+        <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="{{loginUrl}}">返回首页</a></span>
     </nav>
     <div class="main">
         <h1>用户注册</h1>
         <div id="table">
-            <form action="#">
+            <form action="{{regUrl}}" method="post">
                 <table>
                     <tr>
                         <td>
                             <div class="infotext"> 学号：</div>
                         </td>
                         <td>
-                            <input type="text" name="codetxt" class="info" size="30px"/>
+                            <input type="text" name="codetxt" class="info" size="30px" />
                         </td>
                         <td class="tips">
                             请输入012开头的13位学号。
@@ -34,7 +34,7 @@
                             <div class="infotext"> 姓名：</div>
                         </td>
                         <td>
-                            <input type="text" name="nametxt" class="info" size="30px"/>
+                            <input type="text" name="nametxt" class="info" size="30px" />
                         </td>
                         <td class="tips">
                             请输入您在教务系统中的姓名。
@@ -45,7 +45,7 @@
                             <div class="infotext">专业班级：</div>
                         </td>
                         <td>
-                            <select name="mjtxt" id="mj" class="info" >
+                            <select name="mjtxt" id="mj" class="info">
                                 <option value="bmc">工商管理类</option>
                                 <option value="bm">工商管理</option>
                                 <option value="ac">会计</option>
@@ -56,13 +56,13 @@
                                 <option value="hr">人力资源</option>
                                 <option value="mk">市场营销</option>
                             </select>
-                            <select name="yrtxt" id="yr" class="info" >
+                            <select name="yrtxt" id="yr" class="info">
                                 <option value="21">21</option>
                                 <option value="20">20</option>
                                 <option value="19">19</option>
                                 <option value="18">18</option>
                             </select>
-                            <select name="cltxt" id="cl" class="info" >
+                            <select name="cltxt" id="cl" class="info">
                                 <option value="01">01</option>
                                 <option value="02">02</option>
                                 <option value="03">03</option>
@@ -86,7 +86,7 @@
                             <div class="infotext">密码：</div>
                         </td>
                         <td>
-                            <input type='password' name="pwdtxt" class="info" size="30px"/>
+                            <input type='password' name="pwdtxt" class="info" size="30px" />
                         </td>
                         <td class="tips">
                             请输入您的8位以上密码。
@@ -97,7 +97,7 @@
                             <div class="infotext">确认密码：</div>
                         </td>
                         <td>
-                            <input type='password' class="info" size="30px"/>
+                            <input type='password' class="info" size="30px" />
                         </td>
                         <td class="tips">
                             请再次输入密码确保无误。
@@ -110,7 +110,7 @@
                 </div>
             </form>
         </div>
-        
+
     </div>
     <footer>
         <a href="#">关于&nbsp;</a>

@@ -1,0 +1,50 @@
+main{
+    display: block;
+    width: 1250px;
+    height: fit-content;
+    margin: 0 auto;
+}
+
+div.main{
+    display: block;
+    float: right;
+    width: 800px;
+    height: auto;
+    min-height: 600px;
+    background-color: rgb(224, 229, 236);
+	box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
+	-webkit-box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
+	border-radius: 43px;
+	-webkit-border-radius: 43px;
+}
+div.feature{
+    display: block;
+    width: 200px;
+    height: 76px;
+    line-height: 76px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: rgb(224, 229, 236);
+	box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
+	-webkit-box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
+	border-radius: 43px;
+	-webkit-border-radius: 43px;
+    margin-top: 150px;
+}
+
+aside{
+    display: block;
+    border: 1px;
+    border-color: #000;
+    height: 800px;
+    width: 250px;
+    float: left;
+}
+
+footer{
+    display: block;
+    float: left;
+    clear: both;
+    margin-left: 760px;
+}

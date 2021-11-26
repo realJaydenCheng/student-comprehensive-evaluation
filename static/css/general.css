@@ -10,14 +10,17 @@ nav {
 	height: 50px;
 	width: 1250px;
 	margin: 0 auto;
-	line-height: 50px;
+}
+
+#logo{
+	float: left;
 }
 
 #top {
 	display: inline;
 	text-align: right;
 	margin-left: 65%;
-	line-height: 50px;
+	line-height: 25px;
 }
 
 .main{

@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>{{feature}}-学生综合素质评价微系统(SCE)</title>
-        <link rel="stylesheet" href="../static/css/general.css">
-        <link rel="stylesheet" href="../static/css/features.css">
-    </head>
+
+<head>
+    <meta charset="utf-8">
+    <title>{{feature}}-学生综合素质评价微系统(SCE)</title>
+    <link rel="stylesheet" href="../static/css/general.css">
+    <link rel="stylesheet" href="../static/css/features.css">
+</head>
 
 
-    <body>
-        <nav>
-            <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px" id='logo'>
-            <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="./login.html">返回首页</a></span>
-            <span id="top">欢迎您：<i>{{user_name}}</i></span>
-        </nav>
-        
-        <main>
-            <div class="main">
-                {% block main %}
-                {% endblock main %}
-            </div>
-            <aside>
-                <div class="feature" id="modify">增 改 信 息</div>
-                <div class="feature" id="check">查 看 公 示</div>
-                <div class="feature" id="apprv">审 核 信 息</div>
-            </aside>
-        </main>
-        <footer>
-            <a href="#">关于&nbsp;</a>
-            &nbsp;|&nbsp;
-            <a href="license.html">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
-        </footer>
-    </body>
+<body>
+    <nav>
+        <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px" id='logo'>
+        <span id="top">
+            学生综合素质评价微系统&nbsp;&nbsp;|&nbsp;&nbsp;欢迎您：<i>{{user_name}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="{{url_for('index')}}">返回首页</a>
+        </span>
+        <span id="top"></span>
+    </nav>
+
+    <main>
+        <div class="main">
+            {% block main %}
+            {% endblock main %}
+        </div>
+        <aside>
+            <div class="feature" id="modify">增 改 信 息</div>
+            <div class="feature" id="check">查 看 公 示</div>
+            <div class="feature" id="apprv">审 核 信 息</div>
+        </aside>
+    </main>
+    <footer>
+        <a href="#">关于&nbsp;</a>
+        &nbsp;|&nbsp;
+        <a href="{{url_for('license')}}">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
+    </footer>
+</body>
+
 </html>

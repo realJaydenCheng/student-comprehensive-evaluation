@@ -17,10 +17,11 @@ nav {
 }
 
 #top {
-	display: inline;
+	display: block;
 	text-align: right;
-	margin-left: 65%;
-	line-height: 25px;
+	float: right;
+	line-height: 50px;
+	margin-top: 14px;
 }
 
 .main{

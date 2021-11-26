@@ -5,6 +5,14 @@
     <meta charset="utf-8">
     <title>登录-学生综合素质评价微系统(SCE)</title>
     <link rel="stylesheet" href="../static/css/login.css">
+    {% for message in get_flashed_messages() %}
+    {% if message %}
+    <script>
+        window.onload=function(){alert('{{ message }}')}
+    </script>
+    {% else %}
+    {% endif %}
+    {% endfor %}
 </head>
 
 <body>
@@ -47,7 +55,7 @@
                 </table>
                 <div class="obtn">
                     <input type="submit" class="btn" value="登&nbsp;录">
-                    <input type="button" class="btn" value="注&nbsp;册" onclick="location.href='{{url_for('reg')}}'">
+                    <input type="button" class="btn" value="注&nbsp;册" onclick="location.href='{{url_for('reg')}};'">
                 </div>
 
             </form>

@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="../static/css/reg.css">
     <script src='../static/js/md5.js'></script>
     <script src="../static/js/reg.js"></script>
+    {% for message in get_flashed_messages() %}
+    {% if message %}
+    <script>
+        window.onload=function(){alert('{{ message }}')}
+    </script>
+    {% else %}
+    {% endif %}
+    {% endfor %}
 </head>
 
 <body>

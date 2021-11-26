@@ -10,7 +10,7 @@
 <body>
     <nav>
         <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px">
-        <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="./reg.html">用户注册</a></span>
+        <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="{{url_for('reg')}}">用户注册</a></span>
     </nav>
     <div id="main">
         <div id="slogan">
@@ -20,7 +20,7 @@
         </div>
         <div class="glass" id="log">
             <h1>用户登录</h1>
-            <form action="{{loginUrl}}" method="POST">
+            <form action="{{url_for('login')}}" method="POST">
                 <table>
                     <tr>
                         <td class="img">
@@ -47,7 +47,7 @@
                 </table>
                 <div class="obtn">
                     <input type="submit" class="btn" value="登&nbsp;录">
-                    <input type="button" class="btn" value="注&nbsp;册" onclick="location.href='./reg'">
+                    <input type="button" class="btn" value="注&nbsp;册" onclick="location.href='{{url_for('reg')}}'">
                 </div>
 
             </form>
@@ -57,7 +57,7 @@
     <footer>
         <a href="#">关于&nbsp;</a>
         &nbsp;|&nbsp;
-        <a href="license.html">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
+        <a href="{{url_for('license')}}">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
     </footer>
 </body>
 

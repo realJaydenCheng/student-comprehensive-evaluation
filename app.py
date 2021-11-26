@@ -6,14 +6,19 @@ from flask_sqlalchemy import SQLAlchemy
 import pymysql
 import random
 import string
+from scepy.reg import *
 
 pymysql.install_as_MySQLdb()
 app = Flask(__name__) 
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:42289062awsdfG@localhost/sce_db"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 0
 Flask.secret_key = ''.join(random.sample(string.ascii_letters + string.digits, 8))
 db  = SQLAlchemy(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:42289062awsdfG@localhost/sce_db"
+
+
 
 class User(db.Model) : 
+    __tablename__ = "user"
     uid = db.Column(db.CHAR(13), primary_key=1)
     name = db.Column(db.VARCHAR(20), nullable=0)
     major = db.Column(db.VARCHAR(4) , nullable=0)
@@ -24,11 +29,13 @@ class User(db.Model) :
 @app.route('/sce')
 @app.route('/home')
 @app.route('/index')
-def sec_index() :
-    if session['is_log'] :
-        return render_template('/license.html')
+def index() :
+    if session.get('is_log',0) :
+        username = User.query.filter_by(uid = session['uid']).first()
+        username = username.name
+        return render_template('_features.html' , user_name = username)
     else :
-        return redirect('/sce/login')
+        return redirect(url_for('login'))
 
 @app.route('/sce/login', methods=['GET', 'POST'])
 def login() :
@@ -37,26 +44,34 @@ def login() :
     elif request.method == 'POST' :
         session['uid'] = request.form.get('codetxt') # 获取表单数据
         session['is_log'] = 1
-        return render_template('license.html')
+        return redirect(url_for('index'))
 
 @app.route('/sce/reg' , methods = ['GET','POST'])
 def reg() :
     if request.method == 'GET' : 
         return render_template('reg.html')
     elif request.method == 'POST' :
-        uid = request.form.get('codetxt')
-        if User.query.get(uid) :
+        form = request.form
+        uid = form.get('codetxt')
+        if User.query.filter_by(uid=uid).first() :
+            flash('该学号已经注册过，请更换学号或者直接登录。')
             return redirect(url_for('reg'))
-        reg_user = User(
-            uid = uid ,
-            name =  request.form.get('nametxt') ,
-            major =  request.form.get('mjtxt') ,
-            grClass =  request.form.get('yrtxt') +  request.form.get('cltxt') ,
-            pwd =  request.form.get('pwdtxt')
-        )
-        db.session.add(reg_user)
-        db.session.commit()
-        return redirect(url_for('login'))
+        if check_reg_form(form) :
+            reg_user = User(
+                uid = uid ,
+                name =  form.get('nametxt') ,
+                major =  form.get('mjtxt') ,
+                grClass =  form.get('yrtxt') +  form.get('cltxt') ,
+                pwd =  form.get('pwdtxt')
+            )
+            db.session.add(reg_user)
+            db.session.commit()
+            session['is_log'] = 0
+            flash('注册成功！')
+            return redirect(url_for('login'))
+        else :
+            flash('注册信息填写有误，请检查后重试。')
+            return redirect(url_for('reg'))
 
 @app.route('/sce/license')
 def license() :

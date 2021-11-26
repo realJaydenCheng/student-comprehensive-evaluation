@@ -5,36 +5,40 @@
     <meta charset="utf-8">
     <title>注册-学生综合素质评价微系统(SCE)</title>
     <link rel="stylesheet" href="../static/css/general.css">
-    <link rel="stylesheet" href="..\static\css\reg.css">
+    <link rel="stylesheet" href="../static/css/reg.css">
+    <script src='../static/js/md5.js'></script>
+    <script src="../static/js/reg.js"></script>
 </head>
 
 <body>
     <nav>
         <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px">
-        <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="{{loginUrl}}">返回首页</a></span>
+        <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="{{url_for('login')}}">返回首页</a></span>
     </nav>
     <div class="main">
         <h1>用户注册</h1>
         <div id="table">
-            <form action="{{regUrl}}" method="post">
+            <form action="{{regUrl}}" method="post" onsubmit="return  beforeSubmit();">
                 <table>
                     <tr>
                         <td>
-                            <div class="infotext"> 学号：</div>
+                            <div class="infotext">学号</div>
                         </td>
                         <td>
-                            <input type="text" name="codetxt" class="info" size="30px" />
+                            <input type="text" name="codetxt" id="code" class="info" size="30px"
+                                onchange="checkCode()" />
                         </td>
-                        <td class="tips">
+                        <td class="tips" id="codetip">
                             请输入012开头的13位学号。
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="infotext"> 姓名：</div>
+                            <div class="infotext" id="codetip"> 姓名</div>
                         </td>
                         <td>
-                            <input type="text" name="nametxt" class="info" size="30px" />
+                            <input type="text" name="nametxt" class="info" size="30px" id="name"
+                                onchange="checkName()" />
                         </td>
                         <td class="tips">
                             请输入您在教务系统中的姓名。
@@ -42,14 +46,14 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="infotext">专业班级：</div>
+                            <div class="infotext">专业班级</div>
                         </td>
                         <td>
-                            <select name="mjtxt" id="mj" class="info">
+                            <select name="mjtxt" id="mj" class="info" onchange="activeSelect()">
                                 <option value="bmc">工商管理类</option>
                                 <option value="bm">工商管理</option>
                                 <option value="ac">会计</option>
-                                <option value="mis">信管</option>
+                                <option value="mis" selected>信管</option>
                                 <option value="gj">工商gj</option>
                                 <option value="acca">会计ACCA</option>
                                 <option value="fm">财务管理</option>
@@ -57,24 +61,15 @@
                                 <option value="mk">市场营销</option>
                             </select>
                             <select name="yrtxt" id="yr" class="info">
-                                <option value="21">21</option>
+                                <option value="21" selected>21</option>
                                 <option value="20">20</option>
                                 <option value="19">19</option>
                                 <option value="18">18</option>
                             </select>
                             <select name="cltxt" id="cl" class="info">
-                                <option value="01">01</option>
+                                <option value="01" selected>01</option>
                                 <option value="02">02</option>
                                 <option value="03">03</option>
-                                <option value="04">05</option>
-                                <option value="06">06</option>
-                                <option value="07">07</option>
-                                <option value="08">08</option>
-                                <option value="09">09</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
                             </select>
                         </td>
                         <td class="tips">
@@ -83,23 +78,24 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="infotext">密码：</div>
+                            <div class="infotext">密码</div>
                         </td>
                         <td>
-                            <input type='password' name="pwdtxt" class="info" size="30px" />
+                            <input type='password' name="pwdtxt" id="pwd1" class="info" size="30px"
+                                onchange="checkPwd()" />
                         </td>
-                        <td class="tips">
+                        <td class="tips" id="pwdtip1">
                             请输入您的8位以上密码。
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="infotext">确认密码：</div>
+                            <div class="infotext">确认密码</div>
                         </td>
                         <td>
-                            <input type='password' class="info" size="30px" />
+                            <input type='password' id="pwd2" class="info" size="30px" onchange="checkPwd()" />
                         </td>
-                        <td class="tips">
+                        <td class="tips" id="pwdtip2">
                             请再次输入密码确保无误。
                         </td>
                     </tr>
@@ -115,7 +111,7 @@
     <footer>
         <a href="#">关于&nbsp;</a>
         &nbsp;|&nbsp;
-        <a href="license.html">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
+        <a href="url_for('license')">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
     </footer>
 </body>
 

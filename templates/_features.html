@@ -4,8 +4,18 @@
 <head>
     <meta charset="utf-8">
     <title>{{feature}}-学生综合素质评价微系统(SCE)</title>
+    <link rel="icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">  
     <link rel="stylesheet" href="../static/css/general.css">
     <link rel="stylesheet" href="../static/css/features.css">
+    {% for message in get_flashed_messages() %}
+    {% if message %}
+    <script>
+        window.onload=function(){alert('{{ message }}')}
+    </script>
+    {% else %}
+    {% endif %}
+    {% endfor %}
 </head>
 
 
@@ -14,7 +24,7 @@
         <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px" id='logo'>
         <span id="top">
             学生综合素质评价微系统&nbsp;&nbsp;|&nbsp;&nbsp;欢迎您：<i>{{user_name}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="{{url_for('index')}}">返回首页</a>
+            <a href="{{url_for('index')}}">返回首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{url_for('login')}}?exit=1">退出登录</a>
         </span>
         <span id="top"></span>
     </nav>

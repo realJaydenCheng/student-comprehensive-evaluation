@@ -4,13 +4,15 @@
 <head>
     <meta charset="utf-8">
     <title>SAY NO TO SUICIDE PUBLIC LICENSE</title>
+    <link rel="icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">  
     <link rel="stylesheet" href="../static/css/general.css">
 </head>
 
 <body>
     <nav>
         <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px">
-        <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="./login.html">返回首页</a></span>
+        <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="{{url_for('login')}}">返回首页</a></span>
     </nav>
     <div class="main">
         <h1>SAY NO TO SUICIDE PUBLIC LICENSE <br />对自杀说不 开放源代码协议</h1>
@@ -41,7 +43,7 @@
     <footer>
         <a href="#">关于&nbsp;</a>
         &nbsp;|&nbsp;
-        <a href="license.html">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
+        <a href="{{url_for('license')}}">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
     </footer>
 
 </body>

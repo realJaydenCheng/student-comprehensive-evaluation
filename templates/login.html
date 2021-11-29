@@ -4,7 +4,11 @@
 <head>
     <meta charset="utf-8">
     <title>登录-学生综合素质评价微系统(SCE)</title>
+    <link rel="icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">  
     <link rel="stylesheet" href="../static/css/login.css">
+    <script src="../static/js/md5.js"></script>
+    <script src="../static/js/login.js"></script>
     {% for message in get_flashed_messages() %}
     {% if message %}
     <script>
@@ -28,16 +32,16 @@
         </div>
         <div class="glass" id="log">
             <h1>用户登录</h1>
-            <form action="{{url_for('login')}}" method="POST">
+            <form action="{{url_for('login')}}" method="POST" onsubmit="return beforeLogin() ;">
                 <table>
                     <tr>
                         <td class="img">
                             <img src="../static/img/user_s.png" alt="code" width="18">
                         </td>
                         <td>
-                            <input type="text" class="info" name="codetxt" placeholder="请输入学号">
+                            <input type="text" onchange="is012Code(document.getElementById('codetxt').value)" class="info" name="codetxt" placeholder="请输入学号" id="codetxt">
                         </td>
-                        <td class="tips">
+                        <td class="tips" id="uidtip">
                             请输入012开头的13位学号。
                         </td>
                     </tr>
@@ -46,7 +50,7 @@
                             <img src="../static/img/pwd_s.png" alt="pwd" width="18">
                         </td>
                         <td>
-                            <input class="info" type="password" name="pwdtxt" placeholder="请输入密码">
+                            <input class="info" type="password" name="pwdtxt" placeholder="请输入密码" id="pwdtxt">
                         </td>
                         <td class="tips">
                             请输入您的8位以上密码。
@@ -55,7 +59,7 @@
                 </table>
                 <div class="obtn">
                     <input type="submit" class="btn" value="登&nbsp;录">
-                    <input type="button" class="btn" value="注&nbsp;册" onclick="location.href='{{url_for('reg')}};'">
+                    <input type="button" class="btn" value="注&nbsp;册" onclick="location.href='{{url_for('reg')}}'">
                 </div>
 
             </form>

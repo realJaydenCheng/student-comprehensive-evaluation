@@ -8,6 +8,10 @@ import random
 import string
 from scepy.reg import check_reg_form
 from scepy.login import check_login_form
+from scepy.features import get_day_time
+import time
+
+levels = {0:"学生",1:"学生干部",2:"辅导员"}
 
 pymysql.install_as_MySQLdb()
 app = Flask(__name__) 
@@ -15,6 +19,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:42289062awsdfG@localhost/s
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 0
 Flask.secret_key = ''.join(random.sample(string.ascii_letters + string.digits, 8))
 db  = SQLAlchemy(app)
+app.jinja_env.globals['levels'] = levels
+
 
 class User(db.Model) : 
     __tablename__ = "user"
@@ -29,9 +35,18 @@ class User(db.Model) :
 @app.route('/sce/index')
 def index() :
     if session.get('is_log',0) :
+        day_time = get_day_time()
+        board_txt = open('./scepy/board.txt','r',encoding='utf-8').read()
         username = User.query.filter_by(uid = session.get('uid', None)).first()
         username = username.name
-        return render_template('_features.html' , user_name = username)
+        level = eval(session['level'])
+        return render_template(
+            'index_.html' , 
+            user_name = username ,
+            day_time = day_time , 
+            level=level , 
+            infomation=board_txt
+            )
     else :
         return redirect(url_for('login'))
 
@@ -49,8 +64,10 @@ def login() :
     elif request.method == 'POST' :
         form = request.form
         if check_login_form(form , User.query) :
+            user = User.query.filter_by(uid=form.get('codetxt')).first()
             session['uid'] = form.get('codetxt') # 获取表单数据
             session['is_log'] = 1
+            session['level'] = user.level
             flash('登陆成功！')
             return redirect(url_for('index'))
         else :

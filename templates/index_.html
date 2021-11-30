@@ -1,0 +1,47 @@
+{% extends '_features.html' %}
+
+{% block head %}
+
+    <title>欢迎-学生综合素质评价微系统(SCE)</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+
+{% endblock head %}
+
+{% block main %} 
+
+    <h1>{{day_time}}好</h1>
+    <p>欢迎{{levels[level]}}<strong>{{user_name}}</strong>使用学生综合素质评价微系统！</p>
+    <div id='board'> 
+        <h3>公告栏</h3>
+        <p>{{infomation}}</p>
+    </div> 
+    <div class="fs" >
+        <dl>
+            <dt>开始</dt>
+            <dd>增改信息</dd>
+            <dd>查看公示</dd>
+            {% if level > 0 %}
+            <dd>审核信息</dd>
+            {% endif %}
+            {% if level == 2 %}
+            <dd>发布公告</dd>
+            {% endif %}
+        </dl>
+    </div>
+    <div class="fs" >
+        <dl>
+            <dt>信息速览</dt>
+            <dd>权限：{{levels[level]}}</dd>
+            {% if level == 1 or level == 0 %}
+            <dd>个人信息状态：{{info_status}}</dd>
+            <dd>班级已提交：{{submit_n}}份</dd>
+            {%elif level == 2%}
+            <dd>年级已提交：{{submit_n}}份</dd>
+            {% endif %}
+        </dl>
+    </div>
+    <div class='logo'>
+        <img src="../static/img/logo-l.png" alt="学生综合素质评价微系统(SCE)" width="355px">
+    </div>
+
+{% endblock main %} 

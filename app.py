@@ -105,3 +105,7 @@ def reg() :
 @app.route('/sce/license')
 def license() :
     return render_template('license.html')
+
+@app.route('/sce/about')
+def about() :
+    return render_template('about.html')

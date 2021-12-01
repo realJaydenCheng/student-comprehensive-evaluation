@@ -10,12 +10,12 @@
 
     <body>
         <div id='bg'>
-            <video autoplay muted loop id="vbg">
+            <video poster="../static/img/poster.png" autoplay muted loop id="vbg">
                 <source src="../static/video/background.mp4" type="video/mp4">
             </video>
         </div>
         <div id="box1" >
-            <h1>风物长宜放眼量.</h1>
+            <h1>風物長宜放眼量.</h1>
             <p style="color: #fff;">/* 这里有一些内容，关于Jayden的 */</p>
             <div class="dct" id='line1'></div>
         </div>
@@ -27,7 +27,7 @@
             <div class="dct" id='line2'></div>
             <div class="tagBox">
                 <span>Web</span><span>Flask</span><span>JavaScript</span>
-                <span>Jinjia 2</span><span>Python 3</span><span>MySql 8</span>
+                <span>Jinjia 2</span><span>Python 3</span><span>MySQL 8</span>
             </div>
             <p>在一个繁忙的周末埋下种子。</p>
             <p>在一个专业课中生根发芽。</p>
@@ -66,7 +66,7 @@
                 
             </div>
         <div id="box4" class="box">
-            <a href="#">关于&nbsp;</a>
+            <a href="{{url_for('index')}}">返回 SCE&nbsp;</a>
             &nbsp;|&nbsp;
             <a href="{{url_for('license')}}">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
         </div>

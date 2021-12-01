@@ -28,7 +28,7 @@
     <div class="main">
         <h1>用户注册</h1>
         <div id="table">
-            <form action="{{regUrl}}" method="post" onsubmit="return  beforeSubmit();">
+            <form action="{{url_for('reg')}}" method="post" onsubmit="return  beforeSubmit();">
                 <table>
                     <tr>
                         <td>
@@ -119,9 +119,9 @@
 
     </div>
     <footer>
-        <a href="#">关于&nbsp;</a>
+        <a href="{{url_for('about')}}">关于&nbsp;</a>
         &nbsp;|&nbsp;
-        <a href="url_for('license')">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
+        <a href="{{url_for('license')}}">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
     </footer>
 </body>
 

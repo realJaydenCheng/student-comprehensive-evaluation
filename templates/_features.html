@@ -25,7 +25,7 @@
     <nav>
         <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px" id='logo'>
         <span id="top">
-            学生综合素质评价微系统&nbsp;&nbsp;|&nbsp;&nbsp;欢迎您：<i>{{user_name}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;
+            学生综合素质评价微系统&nbsp;&nbsp;|&nbsp;&nbsp;欢迎您：<i>{{session.get('name',None)}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;
             <a href="{{url_for('index')}}">返回首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{url_for('login')}}?exit=1">退出登录</a>
         </span>
         <span id="top"></span>
@@ -37,7 +37,7 @@
             {% endblock main %}
         </div>
         <aside>
-            <div class="feature" id="modify">增 改 信 息</div>
+            <div class="feature" id="modify" onclick="location.href='{{url_for('modify')}}'">增 改 信 息</div>
             <div class="feature" id="check">查 看 公 示</div>
             <div class="feature" id="apprv">审 核 信 息</div>
         </aside>

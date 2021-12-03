@@ -17,6 +17,7 @@ div.main{
 	border-radius: 43px;
 	-webkit-border-radius: 43px;
 }
+
 div.feature{
     display: block;
     width: 200px;
@@ -32,6 +33,21 @@ div.feature{
 	-webkit-border-radius: 43px;
     margin-top: 150px;
 }
+
+div.feature:hover{
+    background-color: rgb(220,220,220);
+}
+
+div.feature:active{
+    background-color: rgb(224, 229, 236);
+    box-shadow: rgba(163, 177, 198, 0.5) -3px 3px 6px 0px inset, rgb(255, 255, 255) 3px -3px 6px 0px inset;
+    -webkit-box-shadow: rgba(163, 177, 198, 0.5) -3px 3px 6px 0px inset, rgb(255, 255, 255) 3px -3px 6px 0px inset;
+    border-radius: 43px;
+    -webkit-border-radius: 43px;
+	border: 0;
+    font-size: 21.5px;
+}
+
 
 aside{
     display: block;

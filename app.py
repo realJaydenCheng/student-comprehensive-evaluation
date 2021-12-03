@@ -30,6 +30,11 @@ class User(db.Model) :
     grClass = db.Column(db.CHAR(4) , nullable=0)
     pwd = db.Column(db.CHAR(32) , nullable=0)
     level = db.Column(db.CHAR(1) , nullable=0 , default= '0')
+    def keys(self):
+        return ('uid','name', 'major', 'grClass' , 'pwd' , 'level')
+
+    def __getitem__(self, item):
+        return getattr(self, item)
 
 @app.route('/sce')
 @app.route('/sce/index')
@@ -37,12 +42,9 @@ def index() :
     if session.get('is_log',0) :
         day_time = get_day_time()
         board_txt = open('./scepy/board.txt','r',encoding='utf-8').read()
-        username = User.query.filter_by(uid = session.get('uid', None)).first()
-        username = username.name
         level = eval(session['level'])
         return render_template(
             'index_.html' , 
-            user_name = username ,
             day_time = day_time , 
             level=level , 
             infomation=board_txt
@@ -68,6 +70,7 @@ def login() :
             session['uid'] = form.get('codetxt') # 获取表单数据
             session['is_log'] = 1
             session['level'] = user.level
+            session['name'] = user.name
             flash('登陆成功！')
             return redirect(url_for('index'))
         else :
@@ -109,3 +112,8 @@ def license() :
 @app.route('/sce/about')
 def about() :
     return render_template('about.html')
+
+@app.route('/sce/modify')
+def modify() :
+    info_dict = dict(User.query.filter_by(uid=session['uid']).first())
+    return render_template('modify_.html' , infomation=info_dict)

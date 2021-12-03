@@ -1,0 +1,158 @@
+{% extends '_features.html' %}
+
+{% block head %}
+
+<title>增改信息-学生综合素质评价微系统(SCE)</title>
+<link rel="stylesheet" href="../static/css/index.css">
+<link rel="stylesheet" href="../static/css/modify.css">
+<script src="../static/js/modify.js"></script>
+{% endblock head %}
+
+{% block main %}
+
+<h1>增改信息</h1>
+<form action="{{url_for('modify')}}" method="post">
+    <h2>通用分</h2>
+    <table>
+        <tr>
+            <td class="info">姓名</td>
+            <td>
+                <input type="text" class='infoinput' name='nametxt' value="{{infomation.get('name' , '')}}" readonly
+                    disabled style="background-color: rgb(215,215,215);">
+            </td>
+            <td class="tip"></td>
+        </tr>
+        <tr>
+            <td class="info">学号</td>
+            <td>
+                <input class="infoinput" type="text" name="codetxt" value="{{infomation.get('uid' , '')}}" readonly
+                    disabled style="background-color: rgb(215,215,215);">
+            </td>
+            <td class="tip"></td>
+        </tr>
+        <tr>
+            <td class="info">任职</td>
+            <td>
+                <input class="infoinput" type="text" name="jobtxt" value="{{infomation.get('job','无')}}">
+            </td>
+            <td class="tip">例如“班长”、“学习委员”等，没有请填无。</td>
+        </tr>
+        <tr>
+            <td class="info">思想道德分值</td>
+            <td>
+                <input class="infoinput" type="number" name="mortxt" max="15" min="3.2" step="0.1"
+                    value="{{infomation.get('mor','15')}}">
+            </td>
+            <td class="tip">请如实填写思想道德分值，最高15分</td>
+        </tr>
+        <tr>
+            <td>平均学分绩点</td>
+            <td>
+                <input class="infoinput" type="number" name="gpatxt" max="5.000" min="0.000" step="0.001"
+                    value="{{infomation.get('gpa','')}}">
+            </td>
+            <td class="tip">请填写平均学分绩点，精确到小数点后三位</td>
+        </tr>
+        <tr>
+            <td>体测成绩</td>
+            <td>
+                <input type="number" name="c1txt" class="infoinput" max="100" min="0" step="0.1"
+                    value="{{infomation.get('c1',0)}}">
+            </td>
+            <td class="tip">请填写您的体测成绩</td>
+        </tr>
+        <tr>
+            <td>美育素质分值</td>
+            <td>
+                <input type="number" class="infoinput" name="mytxt" max="5" min="1.4" step="0.1"
+                    value="{{infomation.get('my','5')}}">
+            </td>
+            <td class="tip"></td>
+        </tr>
+        <tr>
+            <td>劳动素质分值</td>
+            <td>
+                <input type="number" name="ldtxt" class="infoinput" max="5" min="1.4" step="0.1"
+                    value="{{infomation.get('ld','5')}}">
+            </td>
+            <td  class="tip"></td>
+        </tr>
+        <tr>
+            <td>处罚分</td>
+            <td>
+                <input type="number" name="distxt" max="10" min="0" class="infoinput" step="0.01"
+                    value="{{infomation.get('dis','0')}}">
+            </td>
+            <td class="tip">请填写处罚分，无需输入符号。</td>
+        </tr>
+        <tr>
+            <td>必修单科最低绩点&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>
+                <input type="number" name="lowtxt" max="5" min="0" step="0.001" class="infoinput"
+                    value="{{infomation.get('low','0')}}">
+            </td>
+            <td class="tip"></td>
+        </tr>
+        <tr>
+            <td>该学年获取学分</td>
+            <td>
+                <input type="number" name="cretxt" max='80' min="20" step="0.25" class="infoinput"
+                    value="{{infomation.get('cre','20')}}">
+            </td>
+            <td class="tip"></td>
+        </tr>
+        <tr>
+            <td>外语等级</td>
+            <td>
+                <div class="select">
+                <select name="cet" id="cet" >
+                    <option value="四">四级</option>
+                    <option value="六">六级</option>
+                    <option value="" selected>{{infomation.get('cet','暂无')}}</option>
+                    <option value="">暂无</option>
+                </select>
+                </div>
+            </td>
+            <td class="tip">请选择您的外语等级</td>
+        </tr>
+        <tr>
+            <td>课外锻炼分值</td>
+            <td>
+                <select name="c2txt" id="c2txt">
+                    <option value="2.5">2.5</option>
+                    <option value="2.1">2.1</option>
+                    <option value="1.5">1.5</option>
+                    <option value="0.7">0.7</option>
+                    <option value="{{infomation.get('c2','')}}">{{infomation.get('c2','')}}</option>
+                </select>
+            </td>
+            <td class="tip"></td>
+        </tr>
+    </table>
+    <h2>奖励分</h2>
+    <table>
+        <tr>
+            <td>序号</td>
+            <td>分值</td>
+            <td>备注获得情况</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>
+                <input type="number" class="re1" name="rewardtxt" max="5" min="0.1" step="0.01" value="">
+            </td>
+            <td>
+                <input type="text" class="re2" name="notetxt" width="30em">
+            </td>
+            <td>
+                X
+            </td>
+        </tr>
+        <tr id="tend">
+            <td>+</td>
+        </tr>
+    </table>
+</form>
+
+
+{% endblock main %}

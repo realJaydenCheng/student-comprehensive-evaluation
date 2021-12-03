@@ -1,0 +1,60 @@
+div#modify{
+    background-color: rgb(224, 229, 236);
+    box-shadow: rgba(163, 177, 198, 0.5) -3px 3px 6px 0px inset, rgb(255, 255, 255) 3px -3px 6px 0px inset;
+    -webkit-box-shadow: rgba(163, 177, 198, 0.5) -3px 3px 6px 0px inset, rgb(255, 255, 255) 3px -3px 6px 0px inset;
+    border-radius: 43px;
+    -webkit-border-radius: 43px;
+	border: 0;
+    font-size: 21.5px;
+}
+
+table{
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+input.infoinput{
+    font-size: 14px;
+    line-height: 28px;
+        background-color: rgb(224, 229, 236);
+        box-shadow: rgba(163, 177, 198, 0.5) 3px 3px 6px 0px inset, rgb(255, 255, 255) -1px -1px 2px 0px inset;
+        -webkit-box-shadow: rgba(163, 177, 198, 0.5) 3px 3px 6px 0px inset, rgb(255, 255, 255) -1px -1px 2px 0px inset;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border: 0;
+        height: 28px;
+        text-align: center;
+        margin-left: auto;
+    width: 16em;
+}
+
+td.tip{
+    font-size: 13px;
+    color: rgb(128,128,128);
+    text-indent: 1.5em;
+}
+
+select{
+    margin-left: 6px;
+}
+
+input.re1,input.re2{
+    font-size: 14px;
+    line-height: 28px;
+        background-color: rgb(224, 229, 236);
+        box-shadow: rgba(163, 177, 198, 0.5) 3px 3px 6px 0px inset, rgb(255, 255, 255) -1px -1px 2px 0px inset;
+        -webkit-box-shadow: rgba(163, 177, 198, 0.5) 3px 3px 6px 0px inset, rgb(255, 255, 255) -1px -1px 2px 0px inset;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border: 0;
+        height: 28px;
+        text-align: center;
+        margin-left: auto;
+}
+
+input.re1{
+    width: 10em;
+}
+input.re2{
+    width: 25em;
+}

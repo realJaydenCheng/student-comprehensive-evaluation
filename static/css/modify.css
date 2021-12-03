@@ -1,10 +1,9 @@
 div#modify{
     background-color: rgb(224, 229, 236);
-    box-shadow: rgba(163, 177, 198, 0.5) -3px 3px 6px 0px inset, rgb(255, 255, 255) 3px -3px 6px 0px inset;
-    -webkit-box-shadow: rgba(163, 177, 198, 0.5) -3px 3px 6px 0px inset, rgb(255, 255, 255) 3px -3px 6px 0px inset;
-    border-radius: 43px;
-    -webkit-border-radius: 43px;
-	border: 0;
+box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px inset, rgb(255, 255, 255) -10px -10px 20px 0px inset;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px inset, rgb(255, 255, 255) -10px -10px 20px 0px inset;
+border-radius: 48px;
+-webkit-border-radius: 48px;
     font-size: 21.5px;
 }
 
@@ -16,11 +15,11 @@ table{
 .infoinput{
     font-size: 14px;
     line-height: 28px;
-        background-color: rgb(224, 229, 236);
-        box-shadow: rgba(163, 177, 198, 0.5) 3px 3px 6px 0px inset, rgb(255, 255, 255) -1px -1px 2px 0px inset;
-        -webkit-box-shadow: rgba(163, 177, 198, 0.5) 3px 3px 6px 0px inset, rgb(255, 255, 255) -1px -1px 2px 0px inset;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
+    background-color: rgb(224, 229, 236);
+box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px inset, rgb(255, 255, 255) -2px -2px 4px 0px inset;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px inset, rgb(255, 255, 255) -2px -2px 4px 0px inset;
+border-radius: 13px;
+-webkit-border-radius: 13px;
         border: 0;
         height: 28px;
         text-align: center;
@@ -41,11 +40,11 @@ select{
 input.re1,input.re2{
     font-size: 14px;
     line-height: 28px;
-        background-color: rgb(224, 229, 236);
-        box-shadow: rgba(163, 177, 198, 0.5) 3px 3px 6px 0px inset, rgb(255, 255, 255) -1px -1px 2px 0px inset;
-        -webkit-box-shadow: rgba(163, 177, 198, 0.5) 3px 3px 6px 0px inset, rgb(255, 255, 255) -1px -1px 2px 0px inset;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
+    background-color: rgb(224, 229, 236);
+box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px inset, rgb(255, 255, 255) -2px -2px 4px 0px inset;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px inset, rgb(255, 255, 255) -2px -2px 4px 0px inset;
+border-radius: 13px;
+-webkit-border-radius: 13px;
         border: 0;
         height: 28px;
         text-align: center;
@@ -61,10 +60,10 @@ input.re2{
 
 .btn {
     background-color: rgb(224, 229, 236);
-    box-shadow: rgba(163, 177, 198, 0.5) 4px -4px 8px 0px, rgb(255, 255, 255) -4px 4px 8px 0px;
-    -webkit-box-shadow: rgba(163, 177, 198, 0.5) 4px -4px 8px 0px, rgb(255, 255, 255) -4px 4px 8px 0px;
-    border-radius: 40px;
-    -webkit-border-radius: 40px;
+    box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px, rgb(255, 255, 255) -10px -10px 20px 0px;
+    -webkit-box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px, rgb(255, 255, 255) -10px -10px 20px 0px;
+    border-radius: 48px;
+    -webkit-border-radius: 48px;
 	border: 0;
 	height: 40px;
 	width: 80px;
@@ -74,10 +73,10 @@ input.re2{
 
 .btn:active {
     background-color: rgb(224, 229, 236);
-    box-shadow: rgba(163, 177, 198, 0.5) -3px 3px 6px 0px inset, rgb(255, 255, 255) 3px -3px 6px 0px inset;
-    -webkit-box-shadow: rgba(163, 177, 198, 0.5) -3px 3px 6px 0px inset, rgb(255, 255, 255) 3px -3px 6px 0px inset;
-    border-radius: 43px;
-    -webkit-border-radius: 43px;
+box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px inset, rgb(255, 255, 255) -10px -10px 20px 0px inset;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px inset, rgb(255, 255, 255) -10px -10px 20px 0px inset;
+border-radius: 48px;
+-webkit-border-radius: 48px;
 	border: 0;
     font-size: 15.5px;
 }

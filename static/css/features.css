@@ -16,10 +16,10 @@ div.main{
     height: auto;
     min-height: 600px;
     background-color: rgb(224, 229, 236);
-	box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
-	-webkit-box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
-	border-radius: 43px;
-	-webkit-border-radius: 43px;
+box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px, rgb(255, 255, 255) -10px -10px 20px 0px;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px, rgb(255, 255, 255) -10px -10px 20px 0px;
+border-radius: 48px;
+-webkit-border-radius: 48px;
 }
 
 div.feature{
@@ -31,10 +31,10 @@ div.feature{
     font-size: 22px;
     font-weight: bold;
     background-color: rgb(224, 229, 236);
-	box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
-	-webkit-box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
-	border-radius: 43px;
-	-webkit-border-radius: 43px;
+    box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px, rgb(255, 255, 255) -10px -10px 20px 0px;
+    -webkit-box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px, rgb(255, 255, 255) -10px -10px 20px 0px;
+    border-radius: 48px;
+    -webkit-border-radius: 48px;
     margin-top: 150px;
 }
 
@@ -44,10 +44,10 @@ div.feature:hover{
 
 div.feature:active{
     background-color: rgb(224, 229, 236);
-    box-shadow: rgba(163, 177, 198, 0.5) -3px 3px 6px 0px inset, rgb(255, 255, 255) 3px -3px 6px 0px inset;
-    -webkit-box-shadow: rgba(163, 177, 198, 0.5) -3px 3px 6px 0px inset, rgb(255, 255, 255) 3px -3px 6px 0px inset;
-    border-radius: 43px;
-    -webkit-border-radius: 43px;
+box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px inset, rgb(255, 255, 255) -10px -10px 20px 0px inset;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px inset, rgb(255, 255, 255) -10px -10px 20px 0px inset;
+border-radius: 48px;
+-webkit-border-radius: 48px;
 	border: 0;
     font-size: 21.5px;
 }

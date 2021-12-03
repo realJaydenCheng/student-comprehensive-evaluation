@@ -5,6 +5,10 @@ main{
     margin: 0 auto;
 }
 
+h1{
+    font-size: 42px;
+}
+
 div.main{
     display: block;
     float: right;

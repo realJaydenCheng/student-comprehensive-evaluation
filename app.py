@@ -12,8 +12,10 @@ from scepy.features import get_day_time
 import time
 
 levels = {0: "学生", 1: "学生干部", 2: "辅导员"}
-majors = {'mis': '信管', 'bmc': '工商类', 'bm': '工商', 'gj': '工商gj',
-          'ac': '会计', 'acca': '会计acca', 'fm': '财务', 'hr': '人力', 'mk': '营销'}
+majors = {
+    'mis': '信管', 'bmc': '工商类', 'bm': '工商', 'gj': '工商gj',
+    'ac': '会计', 'acca': '会计acca', 'fm': '财务', 'hr': '人力', 'mk': '营销'
+}
 
 pymysql.install_as_MySQLdb()
 app = Flask(__name__)
@@ -149,32 +151,52 @@ def about():
 def modify():
     if session.get('is_log', 0) == 1:
         if request.method == 'GET':
+            if session.get('level' , 0) == '2' :
+                flash('辅导员无需填写信息！')
+                return redirect(url_for('index'))
             info_dict = dict(User.query.filter_by(uid=session['uid']).first())
             infos = Info.query.filter_by(uid=session['uid']).first()
-            if infos :
+            if infos:
                 infos = dict(infos)
                 info_dict.update(infos)
             return render_template('modify_.html', infomation=info_dict)
-        if request.method == 'POST' :
+        if request.method == 'POST':
+            if session.get('level' , 0) == '2' :
+                flash('辅导员无需填写信息！')
+                return redirect(url_for('index'))
             form = request.form
             form_get = form.get
             if check_login_form(form, User.query):
-                user_info = Info(
-                    uid = form_get('codetxt') ,
-                    job = form_get('jobtxt') ,
-                    mor = form_get('mortxt') ,
-                    gpa = form_get('gpatxt') ,
-                    cet = form_get('cet') ,
-                    c1 = form_get('c1txt') ,
-                    c2 = form_get('c2txt') ,
-                    my = form_get('mytxt') ,
-                    ld = form_get('ldtxt') ,
-                    dis = form_get('distxt') ,
-                    cre = form_get('cretxt') ,
-                    low = form_get('lowtxt')
-                )
-                db.session.add(user_info)
-                db.session.commit()
+                user_info = Info.query.filter_by(uid=session['uid']).first()
+                if user_info :
+                    user_info.job = form_get('jobtxt')
+                    user_info.mor=form_get('mortxt')
+                    user_info.gpa=form_get('gpatxt')
+                    user_info.cet=form_get('cet')
+                    user_info.c1=form_get('c1txt')
+                    user_info.c2=form_get('c2txt')
+                    user_info.my=form_get('mytxt')
+                    user_info.ld=form_get('ldtxt')
+                    user_info.dis=form_get('distxt')
+                    user_info.cre=form_get('cretxt')
+                    user_info.low=form_get('lowtxt')
+                else :
+                    user_info = Info(
+                        uid=form_get('codetxt'),
+                        job=form_get('jobtxt'),
+                        mor=form_get('mortxt'),
+                        gpa=form_get('gpatxt'),
+                        cet=form_get('cet'),
+                        c1=form_get('c1txt'),
+                        c2=form_get('c2txt'),
+                        my=form_get('mytxt'),
+                        ld=form_get('ldtxt'),
+                        dis=form_get('distxt'),
+                        cre=form_get('cretxt'),
+                        low=form_get('lowtxt')
+                    )
+                    db.session.add(user_info)
+                    db.session.commit()
                 flash('提交成功！')
                 return redirect(url_for('modify'))
     else:

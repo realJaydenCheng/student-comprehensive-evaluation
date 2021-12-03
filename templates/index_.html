@@ -18,9 +18,10 @@
     <div class="fs" >
         <dl>
             <dt>开始</dt>
+            {% if level <= 1 %}
             <dd>增改信息</dd>
             <dd>查看公示</dd>
-            {% if level > 0 %}
+            {% elif level > 0 %}
             <dd>审核信息</dd>
             {% endif %}
             {% if level == 2 %}

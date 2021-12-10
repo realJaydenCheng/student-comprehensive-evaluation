@@ -49,8 +49,8 @@ border-radius: 13px;
 }
 .btn {
     background-color: rgb(224, 229, 236);
-box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px, rgb(255, 255, 255) -10px -10px 20px 0px;
--webkit-box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px, rgb(255, 255, 255) -10px -10px 20px 0px;
+box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
 border-radius: 48px;
 -webkit-border-radius: 48px;
 	border: 0;

@@ -27,8 +27,8 @@ nav {
 .main{
     margin: 100px auto 100px;
 	background-color: rgb(224, 229, 236);
-	box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
-	-webkit-box-shadow: rgba(163, 177, 198, 0.5) 12px -12px 24px 0px, rgb(255, 255, 255) -12px 12px 24px 0px;
+box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
 	border-radius: 43px;
 	-webkit-border-radius: 43px;
     width: 800px;

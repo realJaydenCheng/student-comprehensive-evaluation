@@ -8,7 +8,7 @@ import random
 import string
 from scepy.reg import check_reg_form
 from scepy.login import check_login_form
-from scepy.features import get_day_time
+from scepy.features import get_day_time, check_modify , tran_reward
 import time
 
 levels = {0: "学生", 1: "学生干部", 2: "辅导员"}
@@ -21,8 +21,9 @@ pymysql.install_as_MySQLdb()
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:42289062awsdfG@localhost/sce_db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 0
-Flask.secret_key = ''.join(random.sample(
-    string.ascii_letters + string.digits, 8))
+# Flask.secret_key = ''.join(random.sample(
+#     string.ascii_letters + string.digits, 8))
+Flask.secret_key = 'temp'
 db = SQLAlchemy(app)
 app.jinja_env.globals['levels'] = levels
 app.jinja_env.globals['majors'] = majors
@@ -58,6 +59,8 @@ class Info(db.Model):
     dis = db.Column(db.DECIMAL(4, 2), nullable=0)
     low = db.Column(db.DECIMAL(5, 4), nullable=0)
     cre = db.Column(db.DECIMAL(7, 4), nullable=0)
+    checked = db.Column(db.INT, nullable=0, default=0)
+    notes = db.Column(db.VARCHAR(200), nullable=1)
 
     def keys(self):
         return ('uid', 'job', 'mor', 'gpa', 'cet', 'c1', 'c2', 'my', 'ld', 'dis', 'low', 'cre')
@@ -65,6 +68,19 @@ class Info(db.Model):
     def __getitem__(self, item):
         return getattr(self, item)
 
+
+class Reward(db.Model) :
+    __tablename__ = "reward"
+    id = db.Column(db.INT, primary_key=1)
+    uid = db.Column(db.CHAR(13), primary_key=1)
+    note = db.Column(db.VARCHAR(50), nullable=1)
+    value = db.Column(db.DECIMAL(5,4), nullable=1)
+
+    def keys(self) :
+        return ('id','uid','note','value')
+
+    def __getitem__(self , item) : 
+        return getattr(self, item)
 
 @app.route('/sce')
 @app.route('/sce/index')
@@ -151,7 +167,7 @@ def about():
 def modify():
     if session.get('is_log', 0) == 1:
         if request.method == 'GET':
-            if session.get('level' , 0) == '2' :
+            if session.get('level', 0) == '2':
                 flash('辅导员无需填写信息！')
                 return redirect(url_for('index'))
             info_dict = dict(User.query.filter_by(uid=session['uid']).first())
@@ -159,28 +175,30 @@ def modify():
             if infos:
                 infos = dict(infos)
                 info_dict.update(infos)
-            return render_template('modify_.html', infomation=info_dict)
+            rewards = Reward.query.filter_by(uid=session['uid']).all()
+            return render_template('modify_.html', infomation=info_dict, rewards = rewards)
         if request.method == 'POST':
-            if session.get('level' , 0) == '2' :
+            if session.get('level', 0) == '2':
                 flash('辅导员无需填写信息！')
                 return redirect(url_for('index'))
             form = request.form
             form_get = form.get
-            if check_login_form(form, User.query):
+            if check_login_form(form, User.query) and check_modify():
                 user_info = Info.query.filter_by(uid=session['uid']).first()
-                if user_info :
+                if user_info:
                     user_info.job = form_get('jobtxt')
-                    user_info.mor=form_get('mortxt')
-                    user_info.gpa=form_get('gpatxt')
-                    user_info.cet=form_get('cet')
-                    user_info.c1=form_get('c1txt')
-                    user_info.c2=form_get('c2txt')
-                    user_info.my=form_get('mytxt')
-                    user_info.ld=form_get('ldtxt')
-                    user_info.dis=form_get('distxt')
-                    user_info.cre=form_get('cretxt')
-                    user_info.low=form_get('lowtxt')
-                else :
+                    user_info.mor = form_get('mortxt')
+                    user_info.gpa = form_get('gpatxt')
+                    user_info.cet = form_get('cet')
+                    user_info.c1 = form_get('c1txt')
+                    user_info.c2 = form_get('c2txt')
+                    user_info.my = form_get('mytxt')
+                    user_info.ld = form_get('ldtxt')
+                    user_info.dis = form_get('distxt')
+                    user_info.cre = form_get('cretxt')
+                    user_info.low = form_get('lowtxt')
+                    user_info.checked = 0
+                else:
                     user_info = Info(
                         uid=form_get('codetxt'),
                         job=form_get('jobtxt'),
@@ -193,11 +211,30 @@ def modify():
                         ld=form_get('ldtxt'),
                         dis=form_get('distxt'),
                         cre=form_get('cretxt'),
-                        low=form_get('lowtxt')
+                        low=form_get('lowtxt'),
+                        checked=0
                     )
                     db.session.add(user_info)
-                    db.session.commit()
+                rewards = Reward.query.filter_by(uid=session['uid']).all()
+                rewards_txt = form_get('rewards' , None)
+                new_reward = tran_reward(rewards_txt)
+                if rewards :
+                    for reward in rewards :
+                        db.session.delete(reward)
+                if new_reward:
+                    for id in new_reward :
+                        reward = Reward(
+                            uid=session['uid'],
+                            id=id,
+                            value=new_reward[id][0],
+                            note=new_reward[id][1]
+                        )
+                        db.session.add(reward)
+                db.session.commit()                
                 flash('提交成功！')
+                return redirect(url_for('modify'))
+            else:
+                flash("密码错误或者信息不合法，请重新输入！")
                 return redirect(url_for('modify'))
     else:
         return redirect(url_for('login'))

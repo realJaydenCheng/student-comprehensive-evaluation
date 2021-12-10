@@ -30,6 +30,7 @@ div.feature{
     text-align: center;
     font-size: 22px;
     font-weight: bold;
+    user-select: none;
     background-color: rgb(224, 229, 236);
     box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px, rgb(255, 255, 255) -10px -10px 20px 0px;
     -webkit-box-shadow: rgba(163, 177, 198, 0.5) 10px 10px 20px 0px, rgb(255, 255, 255) -10px -10px 20px 0px;

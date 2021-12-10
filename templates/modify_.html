@@ -143,14 +143,18 @@
     <table>
         <thead>
             <tr>
+                <td style="width: 2em;">序号</td>
                 <td style="width: 10em;">分值</td>
                 <td>备注获得情况</td>
             </tr>             
         </thead>
         <tbody id="relist">
-            <tr id="templine" style="display: none;">
+            <tr id="templine" style="display: none;" >
                 <td>
-                    <input type="number" class="re1" name="rewardtxt" max="5" min="0" step="0.01" value="">
+                    0
+                </td>
+                <td>
+                    <input type="number" class="re1" name="rewardtxt" max="5" min="0" step="0.01" >
                 </td>
                 <td>
                     <input type="text" class="re2" name="notetxt" width="30em">
@@ -159,9 +163,28 @@
                     <div class='sbtn' id="delbtn" onclick="delLine(this);">x</div>
                 </td>
             </tr>
+            {% for reward in rewards %}
             <tr>
                 <td>
-                    <input type="number" class="re1" name="rewardtxt" max="5" min="0" step="0.01" value="">
+                    {{ reward.id }}
+                </td>
+                <td>
+                    <input type="number" class="re1" name="rewardtxt" max="5" min="0" step="0.01" value="{{reward.value}}">
+                </td>
+                <td>
+                    <input type="text" class="re2" name="notetxt" width="30em" value="{{reward.note}}">
+                </td>
+                <td>
+                    <div class='sbtn' id="delbtn" onclick="delLine(this);">x</div>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>
+                    id
+                </td>
+                <td>
+                    <input type="number" class="re1" name="rewardtxt" max="5" min="0" step="0.01">
                 </td>
                 <td>
                     <input type="text" class="re2" name="notetxt" width="30em">
@@ -186,6 +209,7 @@
         <input type="submit" class="btn" value="提 交">
         <input type="reset" class="btn" value="重 置">
     </div>
+    <script>changeIndex();</script>
 </form>
 
 

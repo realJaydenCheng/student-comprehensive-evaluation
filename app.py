@@ -1,21 +1,24 @@
+import random
+import string
+import time
+
+import pymysql
 from flask import Flask, redirect, session, url_for
 from flask.globals import request
 from flask.helpers import flash
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
-import pymysql
-import random
-import string
-from scepy.reg import check_reg_form
+
+from scepy.features import check_modify, get_day_time, tran_reward
 from scepy.login import check_login_form
-from scepy.features import get_day_time, check_modify , tran_reward
-import time
+from scepy.reg import check_reg_form
 
 levels = {0: "学生", 1: "学生干部", 2: "辅导员"}
 majors = {
     'mis': '信管', 'bmc': '工商类', 'bm': '工商', 'gj': '工商gj',
     'ac': '会计', 'acca': '会计acca', 'fm': '财务', 'hr': '人力', 'mk': '营销'
 }
+status = {0:"待班干审核" , 1:"待辅导员审核" , 2:"已完成审核"}
 
 pymysql.install_as_MySQLdb()
 app = Flask(__name__)
@@ -39,7 +42,7 @@ class User(db.Model):
     level = db.Column(db.CHAR(1), nullable=0, default='0')
 
     def keys(self):
-        return ('uid', 'name', 'major', 'grClass', 'pwd', 'level')
+        return ('uid', 'name', 'major', 'grClass', 'pwd', 'level' )
 
     def __getitem__(self, item):
         return getattr(self, item)
@@ -63,37 +66,61 @@ class Info(db.Model):
     notes = db.Column(db.VARCHAR(200), nullable=1)
 
     def keys(self):
-        return ('uid', 'job', 'mor', 'gpa', 'cet', 'c1', 'c2', 'my', 'ld', 'dis', 'low', 'cre')
+        return ('uid', 'job', 'mor', 'gpa', 'cet', 'c1', 'c2', 'my', 'ld', 'dis', 'low', 'cre', 'checked' , 'notes')
 
     def __getitem__(self, item):
         return getattr(self, item)
 
 
-class Reward(db.Model) :
+class Reward(db.Model):
     __tablename__ = "reward"
     id = db.Column(db.INT, primary_key=1)
     uid = db.Column(db.CHAR(13), primary_key=1)
     note = db.Column(db.VARCHAR(50), nullable=1)
-    value = db.Column(db.DECIMAL(5,4), nullable=1)
+    value = db.Column(db.DECIMAL(5, 4), nullable=1)
 
-    def keys(self) :
-        return ('id','uid','note','value')
+    def keys(self):
+        return ('id', 'uid', 'note', 'value')
 
-    def __getitem__(self , item) : 
+    def __getitem__(self, item):
         return getattr(self, item)
 
+
 @app.route('/sce')
+@app.route('/sce/')
 @app.route('/sce/index')
 def index():
     if session.get('is_log', 0):
         day_time = get_day_time()
         board_txt = open('./scepy/board.txt', 'r', encoding='utf-8').read()
         level = eval(session['level'])
+        info = Info.query.filter_by(uid=session.get('uid')).first()
+        if info :
+            info = dict(info)
+        else :
+            info = {'checked' : 0}
+        info_status = status[info.get('checked')]
+        if session.get('level',0) == '2':
+            gr = User.query.filter_by(uid=session.get('uid'))[0].grClass[:2]
+            users = db.session.query(User).filter(User.grClass.like == gr + '%' ).all()
+            submit_n = 0 
+            for user in users :
+                if Info.query.filter_by(uid=user.uid).first() :
+                    submit_n += 1
+        else :
+            gr = User.query.filter_by(uid=session.get('uid'))[0].grClass
+            users = db.session.query(User).filter(User.grClass == gr).all()
+            submit_n = 0 
+            for user in users :
+                if Info.query.filter_by(uid=user.uid).first() :
+                    submit_n += 1
         return render_template(
             'index_.html',
             day_time=day_time,
             level=level,
-            infomation=board_txt
+            infomation=board_txt ,
+            submit_n = submit_n ,
+            info_status = info_status
         )
     else:
         return redirect(url_for('login'))
@@ -118,10 +145,10 @@ def login():
             session['is_log'] = 1
             session['level'] = user.level
             session['name'] = user.name
-            flash('登陆成功！')
+            flash('登陆成功! ')
             return redirect(url_for('index'))
         else:
-            flash('账号或密码输入不正确，请重试！')
+            flash('账号或密码输入不正确，请重试! ')
             return redirect(url_for('login'))
 
 
@@ -146,7 +173,7 @@ def reg():
             db.session.add(reg_user)
             db.session.commit()
             session['is_log'] = 0
-            flash('注册成功！')
+            flash('注册成功! ')
             return redirect(url_for('login'))
         else:
             flash('注册信息填写有误，请检查后重试。')
@@ -168,7 +195,7 @@ def modify():
     if session.get('is_log', 0) == 1:
         if request.method == 'GET':
             if session.get('level', 0) == '2':
-                flash('辅导员无需填写信息！')
+                flash('辅导员无需填写信息! ')
                 return redirect(url_for('index'))
             info_dict = dict(User.query.filter_by(uid=session['uid']).first())
             infos = Info.query.filter_by(uid=session['uid']).first()
@@ -176,10 +203,10 @@ def modify():
                 infos = dict(infos)
                 info_dict.update(infos)
             rewards = Reward.query.filter_by(uid=session['uid']).all()
-            return render_template('modify_.html', infomation=info_dict, rewards = rewards)
+            return render_template('modify_.html', infomation=info_dict, rewards=rewards)
         if request.method == 'POST':
             if session.get('level', 0) == '2':
-                flash('辅导员无需填写信息！')
+                flash('辅导员无需填写信息! ')
                 return redirect(url_for('index'))
             form = request.form
             form_get = form.get
@@ -216,13 +243,13 @@ def modify():
                     )
                     db.session.add(user_info)
                 rewards = Reward.query.filter_by(uid=session['uid']).all()
-                rewards_txt = form_get('rewards' , None)
+                rewards_txt = form_get('rewards', None)
                 new_reward = tran_reward(rewards_txt)
-                if rewards :
-                    for reward in rewards :
+                if rewards:
+                    for reward in rewards:
                         db.session.delete(reward)
                 if new_reward:
-                    for id in new_reward :
+                    for id in new_reward:
                         reward = Reward(
                             uid=session['uid'],
                             id=id,
@@ -230,11 +257,11 @@ def modify():
                             note=new_reward[id][1]
                         )
                         db.session.add(reward)
-                db.session.commit()                
-                flash('提交成功！')
+                db.session.commit()
+                flash('提交成功! ')
                 return redirect(url_for('modify'))
             else:
-                flash("密码错误或者信息不合法，请重新输入！")
+                flash("密码错误或者信息不合法，请重新输入! ")
                 return redirect(url_for('modify'))
     else:
         return redirect(url_for('login'))

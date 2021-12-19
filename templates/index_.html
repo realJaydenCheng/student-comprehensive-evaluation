@@ -19,7 +19,7 @@
         <dl>
             <dt>开始</dt>
             {% if level <= 1 %}
-            <dd>增改信息</dd>
+            <dd><a href="{{url_for('modify')}}">增改信息</a></dd>
             <dd>查看公示</dd>
             {% elif level > 0 %}
             <dd>审核信息</dd>
@@ -42,7 +42,7 @@
         </dl>
     </div>
     <div class='logo'>
-        <img src="../static/img/logo-l.png" alt="学生综合素质评价微系统(SCE)" width="355px">
+        <img src="../static/img/logo-l.png" alt="学生综合素质评价微系统(SCE)" width="320px">
     </div>
 
 {% endblock main %} 

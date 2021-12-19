@@ -27,7 +27,8 @@
         <tr>
             <td class="info">专业班级</td>
             <td>
-                <input type="text" class='infoinput' name='classtxt' value="{{majors.get(infomation.get('major',''),'')+infomation.get('grClass' , '')}}" readonly
+                <input type="text" class='infoinput' name='classtxt'
+                    value="{{majors.get(infomation.get('major',''),'')+infomation.get('grClass' , '')}}" readonly
                     disabled style="background-color: rgb(215,215,215);">
             </td>
             <td class="tip"></td>
@@ -35,7 +36,7 @@
         <tr>
             <td class="info">学号</td>
             <td>
-                <input class="infoinput" type="text" name="codetxt" value="{{infomation.get('uid' , '')}}"  readonly
+                <input class="infoinput" type="text" name="codetxt" value="{{infomation.get('uid' , '')}}" readonly
                     style="background-color: rgb(215,215,215);" id='codetxt'>
             </td>
             <td class="tip" id="uidtip"></td>
@@ -43,7 +44,7 @@
         <tr>
             <td class="info">任职</td>
             <td>
-                <input class="infoinput" type="text" name="jobtxt" value="{{infomation.get('job','无')}}">
+                <input class="infoinput" type="text" name="jobtxt" value="{{infomation.get('job','无')}}" onchange="checkInfo(this);">
             </td>
             <td class="tip">例如“班长”、“学习委员”等，没有请填无。</td>
         </tr>
@@ -51,7 +52,7 @@
             <td class="info">思想道德分值</td>
             <td>
                 <input class="infoinput" type="number" name="mortxt" max="15" min="3.2" step="0.1"
-                    value="{{infomation.get('mor','15')}}">
+                    value="{{infomation.get('mor','15')}}" onchange="checkInfo(this);">
             </td>
             <td class="tip">请如实填写思想道德分值，最高15分</td>
         </tr>
@@ -59,7 +60,7 @@
             <td>平均学分绩点</td>
             <td>
                 <input class="infoinput" type="number" name="gpatxt" max="5.000" min="0.000" step="0.001"
-                    value="{{infomation.get('gpa','')}}">
+                    value="{{infomation.get('gpa','')}}" onchange="checkInfo(this);">
             </td>
             <td class="tip">请填写平均学分绩点，精确到小数点后三位</td>
         </tr>
@@ -67,12 +68,12 @@
             <td>外语等级</td>
             <td>
                 <div class="select">
-                <select name="cet" id="cet" class="infoinput">
-                    <option value="四">四级</option>
-                    <option value="六">六级</option>
-                    <option value="" selected>{{infomation.get('cet','暂无')}}</option>
-                    <option value="">暂无</option>
-                </select>
+                    <select name="cet" id="cet" class="infoinput">
+                        <option value="四">四级</option>
+                        <option value="六">六级</option>
+                        <option value="" selected>{{infomation.get('cet','暂无')}}</option>
+                        <option value="">暂无</option>
+                    </select>
                 </div>
             </td>
             <td class="tip">请选择您的外语等级</td>
@@ -81,7 +82,7 @@
             <td>体测成绩</td>
             <td>
                 <input type="number" name="c1txt" class="infoinput" max="100" min="0" step="0.1"
-                    value="{{infomation.get('c1',0)}}">
+                    value="{{infomation.get('c1',0)}}" onchange="checkInfo(this);">
             </td>
             <td class="tip">请填写您的体测成绩</td>
         </tr>
@@ -96,47 +97,47 @@
                     <option value="{{infomation.get('c2','')}}">{{infomation.get('c2','')}}</option>
                 </select>
             </td>
-            <td class="tip"></td>
+            <td class="tip">请选择您的课外锻炼分值</td>
         </tr>
         <tr>
             <td>美育素质分值</td>
             <td>
                 <input type="number" class="infoinput" name="mytxt" max="5" min="1.4" step="0.1"
-                    value="{{infomation.get('my','5')}}">
+                    value="{{infomation.get('my','5')}}" onchange="checkInfo(this);">
             </td>
-            <td class="tip"></td>
+            <td class="tip">请填写美育分，最高5分</td>
         </tr>
         <tr>
             <td>劳动素质分值</td>
             <td>
                 <input type="number" name="ldtxt" class="infoinput" max="5" min="1.4" step="0.1"
-                    value="{{infomation.get('ld','5')}}">
+                    value="{{infomation.get('ld','5')}}" onchange="checkInfo(this);">
             </td>
-            <td  class="tip"></td>
+            <td class="tip">请填写劳动素质分，最高5分</td>
         </tr>
         <tr>
             <td>处罚分</td>
             <td>
                 <input type="number" name="distxt" max="10" min="0" class="infoinput" step="0.01"
-                    value="{{infomation.get('dis','0')}}">
+                    value="{{infomation.get('dis','0')}}" onchange="checkInfo(this);">
             </td>
-            <td class="tip">请填写处罚分，无需输入符号。</td>
+            <td class="tip">请填写处罚分，无需输入负号</td>
         </tr>
         <tr>
             <td>必修单科最低绩点&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td>
                 <input type="number" name="lowtxt" max="5" min="0" step="0.001" class="infoinput"
-                    value="{{infomation.get('low','0')}}">
+                    value="{{infomation.get('low','0')}}" onchange="checkInfo(this);">
             </td>
-            <td class="tip"></td>
+            <td class="tip">请填写必修单科最低绩点</td>
         </tr>
         <tr>
             <td>该学年获取学分</td>
             <td>
                 <input type="number" name="cretxt" max='80' min="20" step="0.25" class="infoinput"
-                    value="{{infomation.get('cre','20')}}">
+                    value="{{infomation.get('cre','20')}}" onchange="checkInfo(this);">
             </td>
-            <td class="tip"></td>
+            <td class="tip">请如实填写学年获得的学分</td>
         </tr>
     </table>
     <h2>奖励分</h2>
@@ -146,18 +147,18 @@
                 <td style="width: 2em;">序号</td>
                 <td style="width: 10em;">分值</td>
                 <td>备注获得情况</td>
-            </tr>             
+            </tr>
         </thead>
         <tbody id="relist">
-            <tr id="templine" style="display: none;" >
+            <tr id="templine" style="display: none;">
                 <td>
                     0
                 </td>
                 <td>
-                    <input type="number" id="valuetxt" class="re1" max="5" min="0" step="0.01" >
+                    <input type="number"  class="re1" max="5" min="0" step="0.01" required onchange="checkInfo(this);" >
                 </td>
                 <td>
-                    <input type="text" id="notestxt" class="re2" width="30em">
+                    <input type="text" class="re2" width="30em" required onchange="checkInfo(this);">
                 </td>
                 <td>
                     <div class='sbtn' id="delbtn" onclick="delLine(this);">x</div>
@@ -169,10 +170,10 @@
                     {{ reward.id }}
                 </td>
                 <td>
-                    <input type="number" id="valuetxt" class="re1" max="5" min="0" step="0.01" value="{{reward.value}}">
+                    <input type="number" class="re1" max="5" min="0" step="0.01" value="{{reward.value}}" required onchange="checkInfo(this);" >
                 </td>
                 <td>
-                    <input type="text" id="notestxt" class="re2" width="30em" value="{{reward.note}}">
+                    <input type="text" class="re2" width="30em" value="{{reward.note}}" required onchange="checkInfo(this);" >
                 </td>
                 <td>
                     <div class='sbtn' id="delbtn" onclick="delLine(this);">x</div>
@@ -184,10 +185,10 @@
                     id
                 </td>
                 <td>
-                    <input type="number" id="valuetxt" class="re1" max="5" min="0" step="0.01">
+                    <input type="number" class="re1" max="5" min="0" step="0.01" required onchange="checkInfo(this);" >
                 </td>
                 <td>
-                    <input type="text" id="notestxt" class="re2" width="30em">
+                    <input type="text" class="re2" width="30em" required onchange="checkInfo(this);" >
                 </td>
                 <td>
                     <div class='sbtn' id="delbtn" onclick="delLine(this);">x</div>

@@ -26,6 +26,18 @@ function changeIndex() {
 
 function beforeModify() {
     if (beforeLogin()) {
+        let isOk = 0 ;
+        let infos = document.getElementsByClassName('infoinput');
+        for (let i =0 ; i < infos.length ; i++){
+            let info = infos[i] ;
+            if (!checkInfo(info)){
+                isOk = 1 ;
+            }
+        }
+        if (isOk){
+            return false
+        }
+
         var rewards = document.getElementById("rewards");
         var idTxt = '';
         var valueTxt = '';
@@ -40,7 +52,7 @@ function beforeModify() {
                 valueTxt = valueTxt + reward[1].getElementsByTagName('input')[0].value;
                 noteTxt = noteTxt + reward[2].getElementsByTagName('input')[0].value;
             }
-            else{
+            else {
                 idTxt = idTxt + reward[0].innerText + "|next_item_is|";
                 valueTxt = valueTxt + reward[1].getElementsByTagName('input')[0].value + "|next_item_is|";
                 noteTxt = noteTxt + reward[2].getElementsByTagName('input')[0].value + "|next_item_is|";
@@ -50,4 +62,17 @@ function beforeModify() {
         return true;
     }
     else { return false; }
+}
+
+function checkInfo(elem) {
+    let tip = elem.parentNode.parentNode.getElementsByClassName("tip")[0] ;
+    if (elem.value != '') {
+        tip.style.color = 'rgb(128,128,128)';
+        return true;
+    }
+    else {
+        tip.style.color = 'red';
+        return false;
+    }
+
 }

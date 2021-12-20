@@ -102,7 +102,7 @@ def index():
         info_status = status[info.get('checked')]
         if session.get('level',0) == '2':
             gr = User.query.filter_by(uid=session.get('uid'))[0].grClass[:2]
-            users = db.session.query(User).filter(User.grClass.like == gr + '%' ).all()
+            users = db.session.query(User).filter(User.grClass.like(gr + '%')).all()
             submit_n = 0 
             for user in users :
                 if Info.query.filter_by(uid=user.uid).first() :
@@ -248,6 +248,7 @@ def modify():
                 if rewards:
                     for reward in rewards:
                         db.session.delete(reward)
+                        db.session.commit()
                 if new_reward:
                     for id in new_reward:
                         reward = Reward(

@@ -22,11 +22,7 @@ status = {0:"待班干审核" , 1:"待辅导员审核" , 2:"已完成审核"}
 
 pymysql.install_as_MySQLdb()
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:42289062awsdfG@localhost/sce_db"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 0
-# Flask.secret_key = ''.join(random.sample(
-#     string.ascii_letters + string.digits, 8))
-Flask.secret_key = 'temp'
+app.config.from_object("settings.Debug")
 db = SQLAlchemy(app)
 app.jinja_env.globals['levels'] = levels
 app.jinja_env.globals['majors'] = majors

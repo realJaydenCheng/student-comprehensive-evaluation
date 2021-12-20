@@ -1,6 +1,11 @@
 function addLine() {
     let line = document.getElementById('templine').cloneNode(true);
     let list = document.getElementById('relist');
+    let inputs = line.getElementsByTagName('input') ;
+    let num = inputs[0] ;
+    let txt = inputs[1] ; 
+    num.required = true ;
+    txt.required = true ;
     line.style.display = 'table-row';
     list.appendChild(line);
     changeIndex();
@@ -26,17 +31,25 @@ function changeIndex() {
 
 function beforeModify() {
     if (beforeLogin()) {
-        let isOk = 0 ;
+        let isOk = true ;
         let infos = document.getElementsByClassName('infoinput');
         for (let i =0 ; i < infos.length ; i++){
+            if ((i == 6)||(i == 8)){continue;}
             let info = infos[i] ;
             if (!checkInfo(info)){
-                isOk = 1 ;
+                isOk = false ;
+                break ;
             }
         }
-        if (isOk){
-            return false
+        if (!isOk){
+            window.alert("请检查标红处的数据是否填写错误。") ;
+            let pwd = document.getElementById('pwdtxt');
+            pwd.value = '' ;
+            return false;
         }
+
+        let job = document.getElementById("jobtxt");
+        if (!checkJob(job)) {return false;}
 
         var rewards = document.getElementById("rewards");
         var idTxt = '';
@@ -75,4 +88,28 @@ function checkInfo(elem) {
         return false;
     }
 
+}
+
+function checkJob(elem) {
+    let tip = elem.parentNode.parentNode.getElementsByClassName("tip")[0] ;
+    if ((elem.value.length < 50) && (elem.value != '') ) {
+        tip.style.color = 'rgb(128,128,128)';
+        return true;
+    }
+    else {
+        tip.style.color = 'red';
+        elem.value = elem.value.slice(0,10) ;
+        return false;
+    }
+}
+
+function checkNote(elem) {
+    if (elem.value.length < 50 ) {
+        return true;
+    }
+    else {
+        elem.value = elem.value.slice(0,50) ;
+        window.alert("奖励分备注最多五十字符！");
+        return false;
+    }
 }

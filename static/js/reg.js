@@ -57,6 +57,13 @@ function activeSelect() {
 	else if (mj == 'bm' || mj == 'hr' || mj == 'mk') innerSelect(yr, cl, 18, 20, 2);
 	else if (mj == 'gj') innerSelect(yr, cl, 18, 21, 1);
 	else if (mj == 'acca') innerSelect(yr, cl, 18, 20, 1);
+	else if (mj == '%') {
+		cl.innerHTML = '';
+		let opc = document.createElement('option');
+		opc.value = '%';
+		opc.innerText = '全部';
+		cl.appendChild(opc);
+	}
 }
 
 function innerSelect(yrObj, clObj, yrB, yrE, clE) {

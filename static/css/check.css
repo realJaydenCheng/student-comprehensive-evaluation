@@ -31,6 +31,39 @@ padding-bottom: 15px;
 overflow-x: scroll;
 }
 
+.infoinput{
+    background-color: rgb(224, 229, 236);
+box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px inset, rgb(255, 255, 255) -2px -2px 4px 0px inset;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px inset, rgb(255, 255, 255) -2px -2px 4px 0px inset;
+border-radius: 13px;
+-webkit-border-radius: 13px;
+        border: 0;
+        line-height: 26px;
+        height: 26px;
+        text-align: center;
+}
+
+.sbtn{
+    background-color: rgb(224, 229, 236);
+box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px, rgb(255, 255, 255) -2px -2px 4px 0px;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px, rgb(255, 255, 255) -2px -2px 4px 0px;
+border-radius: 20px;
+-webkit-border-radius: 20px;
+border: 0;
+user-select: none;
+width: 3.6em;
+height: 25px;
+}
+
+.sbtn:hover{
+    background-color: rgb(200, 200, 200);
+}
+
+.sbtn:active{
+    background-color: rgb(224, 229, 236);
+box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px inset, rgb(255, 255, 255) -2px -2px 4px 0px inset;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px inset, rgb(255, 255, 255) -2px -2px 4px 0px inset;
+}
 
 table {
     border-collapse: collapse;

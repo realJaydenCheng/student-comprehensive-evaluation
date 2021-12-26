@@ -12,6 +12,11 @@ h3{
     text-align: center;
 }
 
+h3#tch{
+    margin-bottom: 20px;
+    text-align: left;
+}
+
 div.info {
     margin: 55px 0;
 }
@@ -26,6 +31,7 @@ padding-bottom: 15px;
 overflow-x: scroll;
 }
 
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -33,6 +39,10 @@ table {
 -webkit-border-radius: 13px;
 border: 1px solid rgba(255,255,255,0) ;
 width: 1300px;
+}
+
+table.tch{
+    width: 1400px;
 }
  
 td,th {

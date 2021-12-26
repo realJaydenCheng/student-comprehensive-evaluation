@@ -1,5 +1,6 @@
 import random
 import string
+from threading import Condition
 import time
 import decimal
 
@@ -13,15 +14,15 @@ from flask_sqlalchemy import SQLAlchemy
 from scepy.features import check_modify, get_day_time, tran_reward
 from scepy.login import check_login_form
 from scepy.reg import check_reg_form
-from scepy.check import remove_exponent,sprt_v
+from scepy.check import output_infos, Conditions
 
 
 levels = {0: "学生", 1: "学生干部", 2: "辅导员"}
 majors = {
-    'mis': '信管', 'bmc': '工商类', 'bm': '工商', 'gj': '工商gj',
+    'mis': '信管', 'bmc': '工商类', 'bm': '工商', 'gj': '工商gj', '%' : '全部' ,
     'ac': '会计', 'acca': '会计acca', 'fm': '财务', 'hr': '人力', 'mk': '营销'
 }
-status = {0:"待班干审核" , 1:"待辅导员审核" , 2:"已完成审核"}
+status = {0: "待班干审核", 1: "待辅导员审核", 2: "已完成审核"}
 
 pymysql.install_as_MySQLdb()
 app = Flask(__name__)
@@ -41,7 +42,7 @@ class User(db.Model):
     level = db.Column(db.CHAR(1), nullable=0, default='0')
 
     def keys(self):
-        return ('uid', 'name', 'major', 'grClass', 'pwd', 'level' )
+        return ('uid', 'name', 'major', 'grClass', 'pwd', 'level')
 
     def __getitem__(self, item):
         return getattr(self, item)
@@ -65,7 +66,7 @@ class Info(db.Model):
     notes = db.Column(db.VARCHAR(200), nullable=1)
 
     def keys(self):
-        return ('uid', 'job', 'mor', 'gpa', 'cet', 'c1', 'c2', 'my', 'ld', 'dis', 'low', 'cre', 'checked' , 'notes')
+        return ('uid', 'job', 'mor', 'gpa', 'cet', 'c1', 'c2', 'my', 'ld', 'dis', 'low', 'cre', 'checked', 'notes')
 
     def __getitem__(self, item):
         return getattr(self, item)
@@ -85,37 +86,6 @@ class Reward(db.Model):
         return getattr(self, item)
 
 
-class Check_Info():
-    def __init__(self , uid , name , mor , gpa , cet ,
-    sprt , my , ld , dis , re , all , note):
-        self.uid = uid 
-        self.name = name 
-        self.mor = mor 
-        self.gpa = gpa
-        self.cet = cet 
-        self.sprt = sprt
-        self.my = my
-        self.ld = ld
-        self.dis = dis 
-        self.re = re 
-        self.all = all 
-        self.note = note
-    uid = ''
-    name = ''
-    mor = ''
-    gpa = ''
-    cet = ''
-    sprt = ''
-    my = ''
-    ld = ''
-    dis = ''
-    re = ''
-    all = ''
-    note = ''
-    index = 0
-
-
-
 @app.route('/sce')
 @app.route('/sce/')
 @app.route('/sce/index')
@@ -125,32 +95,33 @@ def index():
         board_txt = open('./scepy/board.txt', 'r', encoding='utf-8').read()
         level = eval(session['level'])
         info = Info.query.filter_by(uid=session.get('uid')).first()
-        if info :
+        if info:
             info = dict(info)
-        else :
-            info = {'checked' : 0}
+        else:
+            info = {'checked': 0}
         info_status = status[info.get('checked')]
-        if session.get('level',0) == '2':
+        if session.get('level', 0) == '2':
             gr = User.query.filter_by(uid=session.get('uid'))[0].grClass[:2]
-            users = db.session.query(User).filter(User.grClass.like(gr + '%')).all()
-            submit_n = 0 
-            for user in users :
-                if Info.query.filter_by(uid=user.uid).first() :
+            users = db.session.query(User).filter(
+                User.grClass.like(gr + '%')).all()
+            submit_n = 0
+            for user in users:
+                if Info.query.filter_by(uid=user.uid).first():
                     submit_n += 1
-        else :
+        else:
             gr = User.query.filter_by(uid=session.get('uid'))[0].grClass
             users = db.session.query(User).filter(User.grClass == gr).all()
-            submit_n = 0 
-            for user in users :
-                if Info.query.filter_by(uid=user.uid).first() :
+            submit_n = 0
+            for user in users:
+                if Info.query.filter_by(uid=user.uid).first():
                     submit_n += 1
         return render_template(
             'index_.html',
             day_time=day_time,
             level=level,
-            infomation=board_txt ,
-            submit_n = submit_n ,
-            info_status = info_status
+            infomation=board_txt,
+            submit_n=submit_n,
+            info_status=info_status
         )
     else:
         return redirect(url_for('login'))
@@ -299,54 +270,53 @@ def modify():
     else:
         return redirect(url_for('login'))
 
-@app.route('/sce/check')
-def check() : 
-    if session.get('is_log' , None) :
-        if request.method == "GET" :
-            if session.get("level" , None) == "2" :
-                return render_template("check_tch.html")
-            else :
-                class_mates = db.session.query(User).filter(User.grClass == session["grClass"]).all()
-                if not class_mates :
-                    return render_template("check_stu.html")
 
-                infos = [] 
-                for class_mate in class_mates :
-                    uid = class_mate.uid
-                    info = Info.query.filter_by(uid=uid).first()
-                    if not info :
-                        continue
-                    re_note = ''
-                    rewards = Reward.query.filter_by(uid=uid).all()
-                    re_v = 0
-                    if rewards :
-                        for reward in rewards :
-                            re_v += reward.value
-                            re_note += f"[{remove_exponent(reward.value)}]{reward.note}, "
-                    gpa = ((info.gpa - 1) * 10 + 60) * decimal.Decimal('0.7')
-                    all = info.mor + gpa + sprt_v(info.c1) + info.c2 + info.my + info.ld - info.dis + re_v
-                    infos.append(Check_Info(
-                        uid = uid,
-                        name = class_mate.name ,
-                        mor = remove_exponent(info.mor) ,
-                        gpa = remove_exponent(gpa) ,
-                        cet = info.cet ,
-                        sprt = sprt_v(info.c1) + info.c2 ,
-                        my = remove_exponent(info.my) ,
-                        ld = remove_exponent(info.ld) ,
-                        re = remove_exponent(decimal.Decimal(re_v)) ,
-                        dis = remove_exponent(info.dis) ,
-                        all = remove_exponent(decimal.Decimal(all)) ,
-                        note = re_note
-                        ))
-                infos.sort(key=lambda x:x.all , reverse= 1)
-                i = 1
+@app.route('/sce/check',methods=['GET','POST'])
+def check():
+    if session.get('is_log', None):
+        if request.method == "GET":
+            if session.get("level", None) == "2":
+                condition = Conditions(session['grClass'][:2], '%', '%')
+                class_mates = db.session.query(User).filter(
+                    User.grClass.like(session['grClass'][:2] + '%')).all()
+                if not class_mates:
+                    flash("没有相关数据! ")
+                    return render_template("check_tch.html")
+                infos = output_infos(class_mates, Info, Reward)
                 for info in infos :
-                    info.index = i 
-                    i += 1
-
-                return render_template("check_stu.html" , infos = infos , session=session,majors = majors , n = len(infos))
-        elif request.method == "POST" :
-            return render_template("check_tch.html")
+                    user = User.query.filter_by(uid=info.uid).first()
+                    info.mjcl = majors[user.major] + user.grClass
+                return render_template("check_tch.html", infos=infos, session=session, majors=majors, n=len(infos), condition=condition)
+            else:  # 查找符合条件的User对象，存入列表，交给output_infos()函数格式化输出。
+                class_mates = db.session.query(User).filter(
+                    User.grClass == session["grClass"]).all()
+                if not class_mates:
+                    flash("没有相关数据! ")
+                    return render_template("check_stu.html")
+                infos = output_infos(class_mates, Info, Reward)
+                return render_template("check_stu.html", infos=infos, session=session, majors=majors, n=len(infos))
+        elif request.method == "POST":
+            if session.get("level", None) == "2":
+                condition = Conditions(
+                    session['grClass'][:2],
+                    request.form.get('mj'), 
+                    request.form.get('cl')
+                    )
+                class_mates = db.session.query(User).filter(
+                    User.grClass.like(condition.year + '%'),
+                    User.grClass.like('%' + condition.cl),
+                    User.major.like(condition.major)
+                    ).all()
+                if not class_mates:
+                    flash("没有相关数据! ")
+                    return render_template("check_tch.html", infos=[], session=session, majors=majors, n=0, condition=condition)
+                infos = output_infos(class_mates, Info, Reward)
+                for info in infos :
+                    user = User.query.filter_by(uid=info.uid).first()
+                    info.mjcl = majors[user.major] + user.grClass
+                return render_template("check_tch.html", infos=infos, session=session, majors=majors, n=len(infos), condition=condition)
+            else :
+                flash("同学是不是哪里点错了？")
+                return redirect(url_for('index'))
     else:
         return redirect(url_for('login'))

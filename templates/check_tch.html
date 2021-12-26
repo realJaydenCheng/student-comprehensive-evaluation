@@ -5,6 +5,7 @@
 <title>增改信息-学生综合素质评价微系统(SCE)</title>
 <link rel="stylesheet" href="../static/css/index.css">
 <link rel="stylesheet" href="../static/css/check.css">
+<script src="../static/js/reg.js">window.onload=activeSelect();</script>
 
 {% endblock head %}
 
@@ -13,15 +14,43 @@
 <h1>查看公示</h1>
 
 <div class="info">
-    <h3>班级: {{majors[session['major']]}}{{session['grClass']}}
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        已提交人数: {{n}}
-    </h3>
+    <select name="yr" id="yr" style="display: none;">
+        <option value="{{condition.year}}" selected></option>
+    </select>
+    <form action="{{url_for("check")}}" method="post">
+        <h3 id='tch'>筛选条件</h3>
+        年级: {{condition.year}} &nbsp;&nbsp;&nbsp;&nbsp;
+        专业:
+        <select name="mj" id="mj" onchange="activeSelect();">
+            <option value="%">全部</option>
+            <option value="bmc">工商管理类</option>
+            <option value="bm">工商管理</option>
+            <option value="ac">会计</option>
+            <option value="mis">信管</option>
+            <option value="gj">工商gj</option>
+            <option value="acca">会计ACCA</option>
+            <option value="fm">财务管理</option>
+            <option value="hr">人力资源</option>
+            <option value="mk">市场营销</option>
+            <option value="{{condition.major}}" selected>{{majors.get(condition.major,'')}}</option>
+        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+        班级:
+        <select name="cl" id="cl" class="info" onchange="activeSelect()">
+            <option value="%">全部</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="{{condition.cl}}" selected>{{majors.get(condition.cl,condition.cl)}}</option>
+        </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="查看">
+        <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该条件下已提交人数: {{n}}</b>
+    </form>
 </div>
 
 <div id="list">
-    <table class="table horizontal">
+    <table class="table horizontal tch">
         <thead>
+            <td style="width: 5em;">专业班级</td>
             <td style="width: 5.5em;">姓名</td>
             <td>思德</td>
             <td style="width: 3.5em;">绩点分</td>
@@ -38,6 +67,7 @@
         <tbody>
             {% for info in infos %}
             <tr>
+                <td>{{info.mjcl}}</td>
                 <td>{{info.name}}</td>
                 <td>{{info.mor}}</td>
                 <td>{{info.gpa}}</td>

@@ -72,6 +72,7 @@ function beforeModify() {
             }
         }
         rewards.value = idTxt + "/*a_new_line*/" + valueTxt + "/*a_new_line*/" + noteTxt;
+        window.onbeforeunload = null ;
         return true;
     }
     else { return false; }

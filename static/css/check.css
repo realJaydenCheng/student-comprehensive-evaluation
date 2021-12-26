@@ -1,0 +1,86 @@
+div#check{
+    background-color: rgb(224, 229, 236);
+box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px inset, rgb(255, 255, 255) -4px -4px 8px 0px inset;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px inset, rgb(255, 255, 255) -4px -4px 8px 0px inset;
+border-radius: 48px;
+-webkit-border-radius: 48px;
+    font-size: 21.5px;
+}
+
+h3{
+    margin: 0 auto;
+    text-align: center;
+}
+
+div.info {
+    margin: 55px 0;
+}
+
+div#list{
+    background-color: rgb(224, 229, 236);
+box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px inset, rgb(255, 255, 255) -2px -2px 4px 0px inset;
+-webkit-box-shadow: rgba(163, 177, 198, 0.5) 2px 2px 4px 0px inset, rgb(255, 255, 255) -2px -2px 4px 0px inset;
+border-radius: 13px;
+-webkit-border-radius: 13px;
+padding-bottom: 15px;
+overflow-x: scroll;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 13px;
+-webkit-border-radius: 13px;
+border: 1px solid rgba(255,255,255,0) ;
+width: 1300px;
+}
+ 
+td,th {
+    padding: 0;
+    width: 2.5em;
+}
+ 
+.table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    
+}
+ 
+.table caption {
+    color: #000;
+    font: italic 85%/1 arial,sans-serif;
+    padding: 1em 0;
+    text-align: center;
+}
+ 
+.table td,.table th {
+    border-left: 1px solid #cbcbcb;
+    border-width: 0 0 0 1px;
+    font-size: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: .5em 1em;
+}
+ 
+.table thead {
+    background-color: rgba(208, 208, 208 ,0.5);
+    color: #000;
+    text-align: left;
+    vertical-align: bottom;
+    border-radius: 13px;
+-webkit-border-radius: 13px;
+border: 1px solid rgba(255,255,255,0) ;
+}
+ 
+.table td {
+    background-color: transparent;
+}
+.horizontal td,.horizontal th {
+    border-width: 0 0 1px 0;
+    border-bottom: 1px solid #cbcbcb;
+}
+ 
+.horizontal tbody>tr:last-child>td {
+    border-bottom-width: 0;
+}

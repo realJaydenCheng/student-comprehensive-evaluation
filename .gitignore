@@ -115,3 +115,4 @@ dmypy.json
 .pyre/
 
 res/
+.flaskenv

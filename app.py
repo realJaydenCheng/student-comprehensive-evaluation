@@ -1,6 +1,7 @@
 import random
 import string
 import time
+import decimal
 
 import pymysql
 from flask import Flask, redirect, session, url_for
@@ -12,6 +13,8 @@ from flask_sqlalchemy import SQLAlchemy
 from scepy.features import check_modify, get_day_time, tran_reward
 from scepy.login import check_login_form
 from scepy.reg import check_reg_form
+from scepy.check import remove_exponent,sprt_v
+
 
 levels = {0: "学生", 1: "学生干部", 2: "辅导员"}
 majors = {
@@ -82,6 +85,37 @@ class Reward(db.Model):
         return getattr(self, item)
 
 
+class Check_Info():
+    def __init__(self , uid , name , mor , gpa , cet ,
+    sprt , my , ld , dis , re , all , note):
+        self.uid = uid 
+        self.name = name 
+        self.mor = mor 
+        self.gpa = gpa
+        self.cet = cet 
+        self.sprt = sprt
+        self.my = my
+        self.ld = ld
+        self.dis = dis 
+        self.re = re 
+        self.all = all 
+        self.note = note
+    uid = ''
+    name = ''
+    mor = ''
+    gpa = ''
+    cet = ''
+    sprt = ''
+    my = ''
+    ld = ''
+    dis = ''
+    re = ''
+    all = ''
+    note = ''
+    index = 0
+
+
+
 @app.route('/sce')
 @app.route('/sce/')
 @app.route('/sce/index')
@@ -141,6 +175,8 @@ def login():
             session['is_log'] = 1
             session['level'] = user.level
             session['name'] = user.name
+            session['major'] = user.major
+            session['grClass'] = user.grClass
             flash('登陆成功! ')
             return redirect(url_for('index'))
         else:
@@ -260,5 +296,57 @@ def modify():
             else:
                 flash("密码错误或者信息不合法，请重新输入! ")
                 return redirect(url_for('modify'))
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/sce/check')
+def check() : 
+    if session.get('is_log' , None) :
+        if request.method == "GET" :
+            if session.get("level" , None) == "2" :
+                return render_template("check_tch.html")
+            else :
+                class_mates = db.session.query(User).filter(User.grClass == session["grClass"]).all()
+                if not class_mates :
+                    return render_template("check_stu.html")
+
+                infos = [] 
+                for class_mate in class_mates :
+                    uid = class_mate.uid
+                    info = Info.query.filter_by(uid=uid).first()
+                    if not info :
+                        continue
+                    re_note = ''
+                    rewards = Reward.query.filter_by(uid=uid).all()
+                    re_v = 0
+                    if rewards :
+                        for reward in rewards :
+                            re_v += reward.value
+                            re_note += f"[{remove_exponent(reward.value)}]{reward.note}, "
+                    gpa = ((info.gpa - 1) * 10 + 60) * decimal.Decimal('0.7')
+                    all = info.mor + gpa + sprt_v(info.c1) + info.c2 + info.my + info.ld - info.dis + re_v
+                    infos.append(Check_Info(
+                        uid = uid,
+                        name = class_mate.name ,
+                        mor = remove_exponent(info.mor) ,
+                        gpa = remove_exponent(gpa) ,
+                        cet = info.cet ,
+                        sprt = sprt_v(info.c1) + info.c2 ,
+                        my = remove_exponent(info.my) ,
+                        ld = remove_exponent(info.ld) ,
+                        re = remove_exponent(decimal.Decimal(re_v)) ,
+                        dis = remove_exponent(info.dis) ,
+                        all = remove_exponent(decimal.Decimal(all)) ,
+                        note = re_note
+                        ))
+                infos.sort(key=lambda x:x.all , reverse= 1)
+                i = 1
+                for info in infos :
+                    info.index = i 
+                    i += 1
+
+                return render_template("check_stu.html" , infos = infos , session=session,majors = majors , n = len(infos))
+        elif request.method == "POST" :
+            return render_template("check_tch.html")
     else:
         return redirect(url_for('login'))

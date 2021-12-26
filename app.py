@@ -1,28 +1,24 @@
-import random
-import string
-from threading import Condition
-import time
-import decimal
-
 import pymysql
 from flask import Flask, redirect, session, url_for
 from flask.globals import request
 from flask.helpers import flash
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import and_
 
 from scepy.features import check_modify, get_day_time, tran_reward
 from scepy.login import check_login_form
 from scepy.reg import check_reg_form
-from scepy.check import output_infos, Conditions
+from scepy.check import output_infos, output_apprv, Conditions, remove0
 
 
 levels = {0: "学生", 1: "学生干部", 2: "辅导员"}
 majors = {
-    'mis': '信管', 'bmc': '工商类', 'bm': '工商', 'gj': '工商gj', '%' : '全部' ,
+    'mis': '信管', 'bmc': '工商管理类', 'bm': '工商', 'gj': '工商gj', '%': '全部',
     'ac': '会计', 'acca': '会计acca', 'fm': '财务', 'hr': '人力', 'mk': '营销'
 }
-status = {0: "待班干审核", 1: "待辅导员审核", 2: "已完成审核"}
+status = {0: "待班干审核", 1: "待导员审核", 2: "已完成审核",
+          '0': "待班干审核", '1': "待导员审核", '2': "已完成审核", '%': "全部"}
 
 pymysql.install_as_MySQLdb()
 app = Flask(__name__)
@@ -30,6 +26,9 @@ app.config.from_object("settings.Debug")
 db = SQLAlchemy(app)
 app.jinja_env.globals['levels'] = levels
 app.jinja_env.globals['majors'] = majors
+app.jinja_env.globals['status'] = status
+app.add_template_global(remove0)
+app.add_template_global(str)
 
 
 class User(db.Model):
@@ -268,55 +267,134 @@ def modify():
                 flash("密码错误或者信息不合法，请重新输入! ")
                 return redirect(url_for('modify'))
     else:
+        flash("请先登录~")
         return redirect(url_for('login'))
 
 
-@app.route('/sce/check',methods=['GET','POST'])
+@app.route('/sce/check', methods=['GET', 'POST'])
 def check():
     if session.get('is_log', None):
         if request.method == "GET":
             if session.get("level", None) == "2":
-                condition = Conditions(session['grClass'][:2], '%', '%')
+                condition = Conditions(session['grClass'][:2], '%', '%', '%')
                 class_mates = db.session.query(User).filter(
                     User.grClass.like(session['grClass'][:2] + '%')).all()
                 if not class_mates:
                     flash("没有相关数据! ")
                     return render_template("check_tch.html")
-                infos = output_infos(class_mates, Info, Reward)
-                for info in infos :
+                class_mates = list(map(lambda x: x.uid, class_mates))
+                infos = output_infos(class_mates, Info, Reward, User)
+                for info in infos:
                     user = User.query.filter_by(uid=info.uid).first()
                     info.mjcl = majors[user.major] + user.grClass
-                return render_template("check_tch.html", infos=infos, session=session, majors=majors, n=len(infos), condition=condition)
+                return render_template("check_tch.html", infos=infos, session=session, n=len(infos), condition=condition)
             else:  # 查找符合条件的User对象，存入列表，交给output_infos()函数格式化输出。
                 class_mates = db.session.query(User).filter(
                     User.grClass == session["grClass"]).all()
                 if not class_mates:
                     flash("没有相关数据! ")
                     return render_template("check_stu.html")
-                infos = output_infos(class_mates, Info, Reward)
-                return render_template("check_stu.html", infos=infos, session=session, majors=majors, n=len(infos))
+                class_mates = list(map(lambda x: x.uid, class_mates))
+                infos = output_infos(class_mates, Info, Reward, User)
+                return render_template("check_stu.html", infos=infos, session=session, n=len(infos))
         elif request.method == "POST":
             if session.get("level", None) == "2":
                 condition = Conditions(
                     session['grClass'][:2],
-                    request.form.get('mj'), 
+                    request.form.get('mj'),
                     request.form.get('cl')
-                    )
-                class_mates = db.session.query(User).filter(
+                )
+                class_mates = db.session.query(User).filter(and_(
                     User.grClass.like(condition.year + '%'),
-                    User.grClass.like('%' + condition.cl),
-                    User.major.like(condition.major)
-                    ).all()
+                    User.grClass.like('%' + condition.cl)
+                )).all()
+                class_mates2 = db.session.query(Info).filter(
+                    User.major.like(condition.major)).all()
+                class_mates = list(set(map(lambda x: x.uid, class_mates)) & set(
+                    map(lambda x: x.uid, class_mates2)))
                 if not class_mates:
                     flash("没有相关数据! ")
-                    return render_template("check_tch.html", infos=[], session=session, majors=majors, n=0, condition=condition)
-                infos = output_infos(class_mates, Info, Reward)
-                for info in infos :
+                    return render_template("check_tch.html", infos=[], session=session, n=0, condition=condition)
+                infos = output_infos(class_mates, Info, Reward, User)
+                for info in infos:
                     user = User.query.filter_by(uid=info.uid).first()
                     info.mjcl = majors[user.major] + user.grClass
-                return render_template("check_tch.html", infos=infos, session=session, majors=majors, n=len(infos), condition=condition)
-            else :
-                flash("同学是不是哪里点错了？")
+                return render_template("check_tch.html", infos=infos, session=session, n=len(infos), condition=condition)
+            else:
+                flash("同学是不是哪里点错了捏？")
                 return redirect(url_for('index'))
     else:
+        flash("请先登录~")
+        return redirect(url_for('login'))
+
+
+@app.route('/sce/apprv', methods=['GET', 'POST'])
+def apprv():
+    if session.get('is_log', None):
+        if request.method == 'GET':
+            if session.get("level", None) in ("2", "1"):
+                condition = Conditions(session['grClass'][:2], '%', '%', '%')
+                class_mates = db.session.query(User).filter(
+                    User.grClass.like(session['grClass'][:2] + '%')).all()
+                if not class_mates:
+                    flash("没有相关数据! ")
+                    return render_template('apprv_.html', infos=[], session=session, n=len([]), condition=condition)
+                class_mates = list(map(lambda x: x.uid, class_mates))
+                infos = output_infos(class_mates, Info, Reward, User)
+                infos = output_apprv(infos, Info, Reward, User, majors, status)
+                return render_template('apprv_.html', infos=infos, session=session, n=len(infos), condition=condition)
+            else:
+                flash("这是给辅导员和班干用的功能哦~")
+                return redirect(url_for('index'))
+        elif request.method == "POST":
+            if session.get("level", None) in ("2", "1"):
+                condition = Conditions(
+                    session['grClass'][:2],
+                    request.form.get('mj'),
+                    request.form.get('cl'),
+                    request.form.get('ischeck')
+                )
+                class_mates = db.session.query(User).filter(and_(
+                    User.grClass.like(condition.year + '%'),
+                    User.grClass.like('%' + condition.cl),
+                    User.major.like(condition.major),
+                    Info.checked.like(condition.checked)
+                )).all()
+                class_mates2 = db.session.query(Info).filter(
+                    Info.checked.like(condition.checked)
+                ).all()
+                class_mates = list(set(map(lambda x: x.uid, class_mates)) & set(
+                    map(lambda x: x.uid, class_mates2)))
+                if not class_mates:
+                    flash("没有相关数据! ")
+                    return render_template('apprv_.html', infos=[], session=session, n=len([]), condition=condition)
+                infos = output_infos(class_mates, Info, Reward, User)
+                infos = output_apprv(infos, Info, Reward, User, majors, status)
+                return render_template('apprv_.html', infos=infos, session=session, n=len(infos), condition=condition)
+            else:
+                flash("这是给辅导员和班干用的功能哦~")
+                return redirect(url_for('index'))
+    else:
+        flash("请先登录~")
+        return redirect(url_for('login'))
+
+
+@app.route('/sce/apprving', methods=['POST'])
+def apprving():
+    if session.get('is_log', 0) == 1:
+        if session.get('level', None) in ('1', '2'):
+            uids = list(request.form.keys())
+            for uid in uids:
+                if uid[-1] == 'c':
+                    continue
+                info = Info.query.filter_by(uid=uid).first()
+                info.checked = request.form.get(uid+'c', 0)
+                info.notes = request.form.get(uid, 0)
+            db.session.commit()
+            return redirect(url_for('apprv'))
+        else:
+            flash("这是给辅导员和班干用的功能哦~")
+            return redirect(url_for('index'))
+    else:
+        flash("请先登录~")
         return redirect(url_for('login'))

@@ -2,10 +2,10 @@
 
 {% block head %}
 
-<title>增改信息-学生综合素质评价微系统(SCE)</title>
+<title>查看公示-学生综合素质评价微系统(SCE)</title>
 <link rel="stylesheet" href="../static/css/index.css">
 <link rel="stylesheet" href="../static/css/check.css">
-<script src="../static/js/reg.js">window.onload=activeSelect();</script>
+<script src="../static/js/reg.js">window.onload = activeSelect();</script>
 
 {% endblock head %}
 
@@ -21,7 +21,7 @@
         <h3 id='tch'>筛选条件</h3>
         年级: {{condition.year}} &nbsp;&nbsp;&nbsp;&nbsp;
         专业:
-        <select name="mj" id="mj" onchange="activeSelect();">
+        <select name="mj" id="mj" onchange="activeSelect();" class="infoinput" style="width: 9em;">
             <option value="%">全部</option>
             <option value="bmc">工商管理类</option>
             <option value="bm">工商管理</option>
@@ -35,14 +35,14 @@
             <option value="{{condition.major}}" selected>{{majors.get(condition.major,'')}}</option>
         </select> &nbsp;&nbsp;&nbsp;&nbsp;
         班级:
-        <select name="cl" id="cl" class="info" onchange="activeSelect()">
+        <select name="cl" id="cl" class="infoinput" style="width: 4.5em;">
             <option value="%">全部</option>
             <option value="01">01</option>
             <option value="02">02</option>
             <option value="03">03</option>
             <option value="{{condition.cl}}" selected>{{majors.get(condition.cl,condition.cl)}}</option>
         </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" value="查看">
+        <input type="submit" value="查看" class="sbtn">
         <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该条件下已提交人数: {{n}}</b>
     </form>
 </div>
@@ -78,7 +78,7 @@
                 <td>{{info.re}}</td>
                 <td>{{info.dis}}</td>
                 <td>{{info.all}}</td>
-                <td>{{info.index }}</td>
+                <td>{{info.index}}</td>
                 <td>{{info.note}}</td>
             </tr>
             {% endfor %}

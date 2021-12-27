@@ -29,6 +29,7 @@ app.jinja_env.globals['majors'] = majors
 app.jinja_env.globals['status'] = status
 app.add_template_global(remove0)
 app.add_template_global(str)
+app.add_template_global(len)
 
 
 class User(db.Model):
@@ -97,8 +98,9 @@ def index():
         if info:
             info = dict(info)
         else:
-            info = {'checked': 0}
+            info = {'checked': 0,'notes':''}
         info_status = status[info.get('checked')]
+        notes = f'\n增改信息提示: \n{info["notes"]}\n'
         if session.get('level', 0) == '2':
             gr = User.query.filter_by(uid=session.get('uid'))[0].grClass[:2]
             users = db.session.query(User).filter(
@@ -120,7 +122,9 @@ def index():
             level=level,
             infomation=board_txt,
             submit_n=submit_n,
-            info_status=info_status
+            info_status=info_status,
+            notes = notes,
+            user_name = session.get('name','')
         )
     else:
         return redirect(url_for('login'))
@@ -181,6 +185,20 @@ def reg():
             flash('注册信息填写有误，请检查后重试。')
             return redirect(url_for('reg'))
 
+@app.route('/sce/usetting' , methods=['POST','GET'])
+def usetting():
+    if session.get('is_log' , None) :
+        if request.method == 'GET' :
+            return render_template('usetting.html')
+        if request.method == 'POST' :
+            user = User.query.filter_by(uid=session['uid']).first()
+            if user.pwd == request.form.get('oldpwd','') :
+                user.pwd = request.form['newpwd']
+                db.session.commit()
+                flash("修改成功! ")
+                return redirect(url_for('index'))
+            flash("原密码错误! ")
+            return render_template('usetting.html')
 
 @app.route('/sce/license')
 def license():

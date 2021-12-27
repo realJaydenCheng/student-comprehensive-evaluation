@@ -10,10 +10,13 @@
 {% block main %} 
 
     <h1>{{day_time}}好</h1>
-    <p>欢迎{{levels[level]}}<strong>{{user_name}}</strong>使用学生综合素质评价微系统！</p>
+    <p>欢迎{{levels[level]}}<strong>{{user_name}}</strong>使用学生综合素质评价微系统! </p>
     <div id='board'> 
         <h3>公告栏</h3>
         <p>{{infomation}}</p>
+        {% if len(notes) != 11 %}
+        <p><b>{{notes}}</b></p>
+        {% endif %}
     </div> 
     <div class="fs" >
         <dl>
@@ -32,12 +35,12 @@
     <div class="fs" >
         <dl>
             <dt>信息速览</dt>
-            <dd>权限：{{levels[level]}}</dd>
+            <dd>权限: {{levels[level]}}</dd>
             {% if level == 1 or level == 0 %}
-            <dd>个人信息状态：{{info_status}}</dd>
-            <dd>班级已提交：{{submit_n}}份</dd>
+            <dd>个人信息状态: {{info_status}}</dd>
+            <dd>班级已提交: {{submit_n}}份</dd>
             {%elif level == 2%}
-            <dd>年级已提交：{{submit_n}}份</dd>
+            <dd>年级已提交: {{submit_n}}份</dd>
             {% endif %}
         </dl>
     </div>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8">
+    <title>账户设置-学生综合素质评价微系统(SCE)</title>
+    <link rel="icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">  
+    <link rel="stylesheet" href="../static/css/general.css">
+    <link rel="stylesheet" href="../static/css/reg.css">
+    <script src='../static/js/md5.js'></script>
+    <script src="../static/js/usetting.js"></script>
+    <script src="../static/js/login.js"></script>
+    {% for message in get_flashed_messages() %}
+    {% if message %}
+    <script>
+        window.onload=function(){alert('{{ message }}')}
+    </script>
+    {% else %}
+    {% endif %}
+    {% endfor %}
+</head>
+
+<body>
+    <nav>
+        <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px">
+        <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="{{url_for('login')}}">返回首页</a></span>
+    </nav>
+    <div class="main">
+        <h1>账户设置</h1>
+        <div id="table">
+            <form action="{{url_for('usetting')}}" method="post" onsubmit="return  beforeSubmit();">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="infotext">学号</div>
+                        </td>
+                        <td>
+                            <input type="text" name="codetxt" id="code" class="info" size="30px" value="{{session['uid']}}" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="infotext" id="codetip"> 姓名</div>
+                        </td>
+                        <td>
+                            <input type="text" name="nametxt" class="info" size="30px" id="name" value="{{session['name']}}" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="infotext">专业班级</div>
+                        </td>
+                        <td>
+                            <input type="text" name="grclass" class="info" size="30px" id="grclass" value="{{majors[session['major']]+session['grClass']}}" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="infotext">旧密码</div>
+                        </td>
+                        <td>
+                            <input type='password' name="oldpwd" id="oldpwd" class="info" size="30px" onchange="check8(this);" />
+                        </td>
+                        <td class="tips" id="pwdtip1">
+                            请输入您现在的密码。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="infotext">新密码</div>
+                        </td>
+                        <td>
+                            <input type='password' name="newpwd" id="newpwd" class="info" size="30px"
+                                onchange="checkPwd()" />
+                        </td>
+                        <td class="tips" id="pwdtip2">
+                            请输入您的8位以上密码。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="infotext">确认密码</div>
+                        </td>
+                        <td>
+                            <input type='password' id="pwd2" class="info" size="30px" onchange="checkPwd()" />
+                        </td>
+                        <td class="tips" id="pwdtip3">
+                            请再次输入密码确保无误。
+                        </td>
+                    </tr>
+                </table>
+                <div class="obtn">
+                    <input type="submit" class="btn" value="提 交">
+                    <input type="reset" class="btn" value="重 置">
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <footer>
+        <a href="{{url_for('about')}}">关于&nbsp;</a>
+        &nbsp;|&nbsp;
+        <a href="{{url_for('license')}}">&nbsp;开放源代码协议: SAY NO TO SUICIDE PUBLIC LICENSE</a>
+    </footer>
+</body>
+
+</html>

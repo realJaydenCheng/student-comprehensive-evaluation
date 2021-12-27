@@ -25,7 +25,7 @@
     <nav>
         <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px" id='logo'>
         <span id="top">
-            学生综合素质评价微系统&nbsp;&nbsp;|&nbsp;&nbsp;欢迎您：<i>{{session.get('name',None)}}</i>&nbsp;&nbsp;|&nbsp;&nbsp;
+            学生综合素质评价微系统&nbsp;&nbsp;|&nbsp;&nbsp;欢迎您: <i><a href="{{url_for('usetting')}}">{{session.get('name',None)}}</a></i>&nbsp;&nbsp;|&nbsp;&nbsp;
             <a href="{{url_for('index')}}">返回首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{url_for('login')}}?exit=1">退出登录</a>
         </span>
         <span id="top"></span>
@@ -45,7 +45,7 @@
     <footer>
         <a href="{{url_for('about')}}">关于&nbsp;</a>
         &nbsp;|&nbsp;
-        <a href="{{url_for('license')}}">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
+        <a href="{{url_for('license')}}">&nbsp;开放源代码协议: SAY NO TO SUICIDE PUBLIC LICENSE</a>
     </footer>
 </body>
 

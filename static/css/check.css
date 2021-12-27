@@ -127,3 +127,11 @@ border: 1px solid rgba(255,255,255,0) ;
 .horizontal tbody>tr:last-child>td {
     border-bottom-width: 0;
 }
+
+.download{
+    display: block;
+        margin: 30px auto;
+        height: 60px;
+        width: 9em;
+    
+}

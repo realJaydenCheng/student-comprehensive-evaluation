@@ -1,7 +1,9 @@
+from time import time
 import pymysql
+
 from flask import Flask, redirect, session, url_for
 from flask.globals import request
-from flask.helpers import flash
+from flask.helpers import flash, send_file
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_
@@ -10,11 +12,15 @@ from scepy.features import check_modify, get_day_time, tran_reward
 from scepy.login import check_login_form
 from scepy.reg import check_reg_form
 from scepy.check import output_infos, output_apprv, Conditions, remove0
+from scepy.download import creat_excel ,creat_info_list
 
+
+DATA_PATH = "./scepy/"
+EX_FILE = "data.xls"
 
 levels = {0: "学生", 1: "学生干部", 2: "辅导员"}
 majors = {
-    'mis': '信管', 'bmc': '工商管理类', 'bm': '工商', 'gj': '工商gj', '%': '全部',
+    'mis': '信管', 'bmc': '工商类', 'bm': '工商', 'gj': '工商gj', '%': '全部',
     'ac': '会计', 'acca': '会计acca', 'fm': '财务', 'hr': '人力', 'mk': '营销'
 }
 status = {0: "待班干审核", 1: "待导员审核", 2: "已完成审核",
@@ -301,6 +307,8 @@ def check():
                     flash("没有相关数据! ")
                     return render_template("check_tch.html")
                 class_mates = list(map(lambda x: x.uid, class_mates))
+                datas = creat_info_list(class_mates,User,Info,Reward)
+                creat_excel(DATA_PATH,EX_FILE,datas)
                 infos = output_infos(class_mates, Info, Reward, User)
                 for info in infos:
                     user = User.query.filter_by(uid=info.uid).first()
@@ -326,10 +334,12 @@ def check():
                     User.grClass.like(condition.year + '%'),
                     User.grClass.like('%' + condition.cl)
                 )).all()
-                class_mates2 = db.session.query(Info).filter(
+                class_mates2 = db.session.query(User).filter(
                     User.major.like(condition.major)).all()
                 class_mates = list(set(map(lambda x: x.uid, class_mates)) & set(
                     map(lambda x: x.uid, class_mates2)))
+                datas = creat_info_list(class_mates,User,Info,Reward)
+                creat_excel(DATA_PATH,EX_FILE,datas)
                 if not class_mates:
                     flash("没有相关数据! ")
                     return render_template("check_tch.html", infos=[], session=session, n=0, condition=condition)
@@ -416,3 +426,15 @@ def apprving():
     else:
         flash("请先登录~")
         return redirect(url_for('login'))
+
+@app.route('/sce/download')
+def download():
+    if session.get('is_log', 0) == 1:
+        if session.get('level', None) == '2':
+            return send_file(DATA_PATH+EX_FILE,as_attachment=1,attachment_filename= str(int(time()))+'.xls' )
+        else :
+            flash("同学是不是哪点错了捏？")
+            return redirect('index')
+    else :
+        flash("请先登录哦~")
+        return redirect('login')

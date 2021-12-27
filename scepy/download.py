@@ -1,5 +1,6 @@
 import xlrd
 import decimal
+import shutil,os
 from xlutils.copy import copy
 from scepy.check import remove0,sprt_v
 
@@ -65,6 +66,8 @@ def creat_info_list(uids,User,Info,Reward) :
     return datas
 
 def creat_excel(path,tem_name,datas) :
+    os.remove(path+tem_name)
+    shutil.copyfile("./scepy/data.xls",path+tem_name)
     workbook = xlrd.open_workbook(path+tem_name)
     rows_old = 3  
     new_workbook = copy(workbook)  

@@ -16,7 +16,7 @@ from scepy.download import creat_excel ,creat_info_list
 
 
 DATA_PATH = "./scepy/"
-EX_FILE = "data.xls"
+EX_FILE = "temp.xls"
 
 levels = {0: "学生", 1: "学生干部", 2: "辅导员"}
 majors = {

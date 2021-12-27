@@ -1,6 +1,5 @@
 import decimal
 
-
 class Check_Info():
     def __init__(self, uid, name, mor, gpa, cet,
                  sprt, my, ld, dis, re, all, note, mjcl='',

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+    class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>风采展示-学生综合素质评价微系统</title>
+    <link href="../static/css/honor/animate.min.css" rel="stylesheet">
+    <link href="../static/css/honor/common.css" rel="stylesheet">
+    <link href="../static/css/honor/index.css" rel="stylesheet">
+    <link href="../static/css/honor/shuwon.css" rel="stylesheet">
+    <link href="../static/css/honor/swiper.min.css" rel="stylesheet">
+    <script src="../static/js/frontend.js"></script>
+    <style>
+        * {
+            font-family: 微软雅黑;
+        }
+    </style>
+</head>
+
+<body class="main">
+    <nav>
+        <div class="logo" style="margin-left: 200px;">
+            <a href="{{url_for('login')}}">
+                <img src="../static/img/logo-yellow.png" alt="学生综合素质评价微系统"
+                    style="height: 60px;width: 140px;">
+            </a>
+        </div>
+        <div class="nav-right" style="margin-right: 200px;margin-top: 25px;">
+            <span>学生综合素质评价微系统&nbsp;|&nbsp;<a href="{{url_for('login')}}" style="display: inline;">返回首页</a></span>
+        </div>
+    </nav>
+
+    <div class="m-nav" style="display:none;">
+        <p></p>
+        <p></p>
+    </div>
+
+    <div class="content" style="height:950px;width: 100%;background-color:rgb(230,12,0);">
+        <div class="slogan_" style="height: 950px;width: 62%;margin: 0 auto;padding-top: 15%;">
+            <div id="slogantxt"
+                style="margin: 0 auto;font-size: 120px;font-family: '方正兰亭粗黑简体';color: rgb(211, 211, 125);">
+                我 们 的 榜 样 !
+            </div>
+            <div class="subslogan"
+                style="margin-top: 150px;font-size: 30px;text-align: center;font-family: Consolas;color:rgb(200, 200, 100) ;">
+                /* 优 秀 学 生 风 采 展 示 */
+            </div>
+            <div class="scrdown" style="margin-top: 180px;text-align: center; width: 100%;">
+                <img src="../static/img/arrow.png" alt="向下滚动查看更多" onclick="scrollSmoothly(1080,250);"
+                    style="display: inline;">
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="banner pcbanner">
+        <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
+            <div class="swiper-wrapper" style="transform: translate3d(-1903px, 0px, 0px); transition-duration: 0ms;">
+                <div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index="4"
+                    style="width: 1903px;">
+                    <div class="b">
+                        <a href="{{url_for('goodstu')}}" target="_blank">
+                            <img src="../static/img/honor/stu (1).jpg">
+                            <h3>A同学 校级三好学生</h3>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="0" style="width: 1903px;">
+                    <div class="b">
+                        <a href="{{url_for('goodstu')}}" target="_blank">
+                            <img src="../static/img/honor/stu (2).jpg">
+                            <h3>小明 小华 优秀学生干部</h3>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="1" style="width: 1903px;">
+                    <div class="b">
+                        <a href="{{url_for('goodstu')}}" target="_blank">
+                            <img src="../static/img/honor/stu (3).jpg">
+                            <h3>B同学 校级三好学生标兵</h3>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide" data-swiper-slide-index="2" style="width: 1903px;">
+                    <div class="b">
+                        <a href="{{url_for('goodstu')}}" target="_blank">
+                            <img src="../static/img/honor/stu (4).jpg">
+                            <h3>C同学 志愿服务工作先进个人</h3>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide" data-swiper-slide-index="3" style="width: 1903px;">
+                    <div class="b">
+                        <a href="{{url_for('goodstu')}}" target="_blank">
+                            <img src="../static/img/honor/stu (5).jpg">
+                            <h3>D同学 英语竞赛特等奖</h3>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide-duplicate-prev" data-swiper-slide-index="4"
+                    style="width: 1903px;">
+                    <div class="b">
+                        <a href="{{url_for('goodstu')}}" target="_blank">
+                            <img src="../static/img/honor/stu (1).jpg">
+                            <h3>A同学 校级三好学生</h3>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active"
+                    data-swiper-slide-index="0" style="width: 1903px;">
+                    <div class="b">
+                        <a href="{{url_for('goodstu')}}" target="_blank">
+                            <img src="../static/img/honor/stu (2).jpg">
+                            <h3>小明 小华 优秀学生干部</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination swiper-pagination-white swiper-pagination-bullets"><span
+                    class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span
+                    class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span
+                    class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+            <div class="swiper-button-prev swiper-button-white" tabindex="0" role="button" aria-label="Previous slide">
+            </div>
+            <div class="swiper-button-next swiper-button-white" tabindex="0" role="button" aria-label="Next slide">
+            </div>
+            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+        </div>
+    </div>
+
+    <div class="section1 clearfix">
+        <div class="container">
+            <div class="row">
+
+                <div class="box">
+                    <div class="mask">
+                        <div class="mask-box">
+                            <h1 style="font-family: 微软雅黑;font-weight: bolder;"><strong>荣誉</strong></h1>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3 col-xs-12 wow flipInY" style="visibility: hidden; animation-name: none;">
+                    <div class="img"><img src="../static/img/honor/1.jpg" class="img-responsive"></div>
+                    <div class="text">
+                        <div class="mask">
+                            <div class="mask-box">
+                                <a href="{{url_for('goodstu')}}" target="_blank">
+                                    <h2><i>评定办法</i></h2>
+                                    <p class="visible-lg visible-md"></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12 wow flipInY" style="visibility: hidden; animation-name: none;">
+                    <div class="img"><img src="../static/img/honor/2.jpg" class="img-responsive">
+                    </div>
+                    <div class="text">
+                        <div class="mask">
+                            <div class="mask-box">
+                                <a href="{{url_for('goodstu')}}" target="_blank">
+                                    <h2><i>奖励办法</i></h2>
+                                    <p class="visible-lg visible-md"></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12 wow flipInY" style="visibility: hidden; animation-name: none;">
+                    <div class="img"><img src="../static/img/honor/3.jpg" class="img-responsive">
+                    </div>
+                    <div class="text">
+                        <div class="mask">
+                            <div class="mask-box">
+                                <a href="{{url_for('goodstu')}}" target="_blank">
+                                    <h2><i>更多</i></h2>
+                                    <p class="visible-lg visible-md"></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <footer class="footer" style="margin: 0;background-color: rgb(255, 30, 0);">
+
+        <div class="footer-wrap">
+
+            <div class="left" style="    width: 375px;">
+                <a href="https://www.whut.edu.cn">
+                <div class="logo"> <img src="../static/img/wut-white.png">
+                </div>
+            </a>
+            </div>
+
+            <div class="middle">
+                <div style="width: 570px;margin: 60px;color: #eeeeee;">
+                    <a href="{{url_for('index')}}">返回 SCE&nbsp;</a>
+                    &nbsp;|&nbsp;
+                    <a href="{{url_for('license')}}">&nbsp;开放源代码协议: SAY NO TO SUICIDE PUBLIC LICENSE</a>
+                </div>
+            </div>
+
+            <div class="right">
+                <a href="{{url_for('index')}}">
+                    <div class="logo" style="float: right; clear: both;"> <img src="../static/img/logo-white.png"
+                            height="120px"> </div>
+                </a>
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../static/js/honor/jquery-3.3.1.min.js"></script>
+
+    <script src="../static/js/honor/modernizr.js"></script>
+
+    <script src="../static/js/honor/smooth.min.js"></script>
+
+    <script src="../static/js/honor/jquery.lazyload.js"></script>
+
+    <script src="../static/js/honor/wow.min.js"></script>
+
+    <script src="../static/js/honor/swiper.min.js"></script>
+
+    <script src="../static/js/honor/util.js"></script>
+
+    <script src="../static/js/honor/shuwon.js"></script>
+
+
+    <script>
+        var monthCopy = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
+        $('.news_time1>font').each(function (index, item) {
+            var string = $(item).text();
+            var stringArr = string.split('-');
+            var month = monthCopy[(parseInt(stringArr[1])) - 1];
+
+            $(item).html(month);
+        })
+    </script>
+
+    <style>
+        .clearfix {
+            clear: both;
+            content: "";
+            display: block;
+            overflow: hidden
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        nav ul a:hover li:before {
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            content: '';
+            background-color: #f4b95d;
+            bottom: 0;
+            left: 50%;
+            margin-left: -40px;
+        }
+    </style>
+
+    <script>
+
+        var windt = $(window).width();
+        var thisw = 240;
+        var f = true;
+        var _this = new Object();
+        var _index = 0;
+        var tid = '';
+        if (windt > 768) {
+            $('.navup').hover(function () {
+                f = false;
+            }, function () {
+                f = true;
+                $('.navup').stop().hide();
+                _this.ent.removeClass('activeNav');
+            });
+            $('.nav-right a').each(function (index) {
+                if ($(this).find('li').hasClass('activeNav')) {
+                    _index = index;
+                }
+
+                $(this).hover(function () {
+                    var id = $(this).data('id');
+                    var obj = $('.navid' + id);
+                    var top = $(this).height() + 10;
+                    var left = $(this).offset().left;
+                    $('.nav-right a li').removeClass('activeNav');
+                    //console.log((windt-left)<(thisw/2));
+                    _this.ent = $(this).find('li');
+                    _this.ent.addClass('activeNav');
+                    $('.nav-right a').eq(_index).find('li').addClass('activeNav');
+                    if ((windt - left) < (thisw / 2)) {
+                        obj.css({ 'right': '10px', 'top': top + 'px', 'width': thisw + 'px' }).stop().slideDown();
+                    } else {
+                        obj.css({ 'left': left + 'px', 'top': top + 'px', 'width': thisw + 'px' }).stop().slideDown();
+                    }
+                    //console.log(windt);
+                    if ((windt - left) > (thisw / 2) && windt < 1000) {
+                        obj.css({ 'left': '10px', 'top': top + 'px', 'width': thisw + 'px' }).stop().slideDown();
+                    }
+                }, function () {
+                    var id = $(this).data('id');
+                    var obj = $('.navid' + id);
+                    setTimeout(function () { if (f) { obj.stop().hide(); _this.ent.removeClass('activeNav'); }; }, 50);
+                })
+            })
+        }
+
+    </script>
+    <script>
+        var width = $(window).width();
+        if (width > 768) {
+            var m = 2;
+            var w = 30;
+        } else {
+            var m = 1;
+            var w = 10;
+        }
+        var mySwiper = new Swiper('.section4 .news_swiper', {
+            direction: 'horizontal', // 垂直切换选项
+            loop: true, // 循环模式选项
+            slidesPerView: m,
+            paginationClickable: true,
+            spaceBetween: w,
+            // 如果需要分页器
+            pagination: {
+                el: '.section4  .swiper-pagination',
+            },
+
+            // 如果需要前进后退按钮
+            navigation: {
+                nextEl: '.section4  .swiper-button-next',
+                prevEl: '.section4  .swiper-button-prev',
+            },
+
+        })
+
+
+        window.onload = function () {
+            // var h=$('.section1 .col-md-3').eq(2).height();
+            // $('.section1 .col-md-3').eq(7).css({'height':h+'px'});
+            // $('.section1 .col-md-3').eq(0).css({'height':h+'px'});
+            // var h='230';
+            // $('.section1 .col-md-3').eq(0).css({'height':h+'px'});
+            // $('.section1 .col-md-3').eq(1).css({'height':h+'px'});
+            // $('.section1 .col-md-3').eq(2).css({'height':h+'px'});
+        }
+    </script>
+    <script>
+        var mySwiper = new Swiper('.banner .swiper-container', {
+            direction: 'horizontal', // 垂直切换选项
+            loop: true, // 循环模式选项
+            // 如果需要分页器
+            pagination: {
+                el: '.banner .swiper-pagination',
+            },
+
+            // 如果需要前进后退按钮
+            navigation: {
+                nextEl: '.banner .swiper-button-next',
+                prevEl: '.banner .swiper-button-prev',
+            },
+            autoplay: {
+                delay: 3000,
+                stopOnLastSlide: false,
+                disableOnInteraction: false,
+            }
+        })        
+    </script>
+    <style>
+        .banner .swiper-slide .b {
+            position: relative;
+            width: 100%
+        }
+
+        .banner .swiper-slide img {
+            width: 100%
+        }
+
+        .banner .swiper-slide img {
+            transition: all 24s;
+            -moz-transition: all 24s;
+            -webkit-transition: all 24s;
+            -o-transition: all 24s;
+        }
+
+        .banner .swiper-slide.swiper-slide-active img {
+            transform: scale(1.2);
+        }
+
+        .banner .swiper-slide h3 {
+            color: #fff;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 10%;
+            bottom: 10%
+        }
+    </style>
+    <script type="text/javascript">jQuery(document).ready(function () { shuwon.index(); });</script>
+
+</body>
+
+</html>
+
+<script>window.onload = blinkSlogan()</script>

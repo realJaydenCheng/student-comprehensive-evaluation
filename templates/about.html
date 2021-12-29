@@ -7,6 +7,7 @@
     <link rel="icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../static/css/about.css">
+    <script src="../static/js/frontend.js"></script>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
         <div class="dct" id='line1'></div>
     </div>
     <div id="down">
-        <img src="../static/img/arrow.png" alt="向下滚动查看更多">
+        <img src="../static/img/arrow.png" alt="向下滚动查看更多" onclick="scrollSmoothly(1080,250);">
     </div>
     <div id="box2" class="box">
         <h2>关于SCE</h2>
@@ -42,7 +43,7 @@
         <P>中文名叫“学生综合素质评价微系统”。</P>
         <p>“落实立德树人，发展教育强国”，这是专业课的选题。</p>
         <p>希望它能由小及大、发出微光，在中华民族伟大复兴的进程中贡献绵薄之力</p>
-        <p>“ 打通数据串联的‘最后一公里’ ”，这是登录页的Slogan。</p>
+        <p>“ 打通数据串联的'最后一公里' ”，这是登录页的Slogan。</p>
         <p>希望它能将学工系统与基层工作更好地连接起来，减轻师生负担。</p>
     </div>
     <div id="box3" class="box">
@@ -60,16 +61,16 @@
         <p>希望成为一名现代化码农。</p>
         <p>不是很喜欢打游戏，开黑坑到队友我会伤心 :(</p>
         <p><br></p>
-        <p>很喜欢下面的几句话：</p>
+        <p>很喜欢下面的几句话: </p>
         <p>风物长宜放眼量，乱云飞渡仍从容。</p>
         <p>天资平庸，理应血酬，神魔皆以血饲。</p>
-        <p>你**谁啊！/我**谁啊！</p>
+        <p>你**谁啊! /我**谁啊! </p>
 
     </div>
     <div id="box4" class="box">
         <a href="{{url_for('index')}}">返回 SCE&nbsp;</a>
         &nbsp;|&nbsp;
-        <a href="{{url_for('license')}}">&nbsp;开放源代码协议：SAY NO TO SUICIDE PUBLIC LICENSE</a>
+        <a href="{{url_for('license')}}">&nbsp;开放源代码协议: SAY NO TO SUICIDE PUBLIC LICENSE</a>
     </div>
 </body>
 

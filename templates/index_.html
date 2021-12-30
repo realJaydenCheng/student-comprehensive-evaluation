@@ -14,7 +14,7 @@
     <div id='board'> 
         <h3>公告栏</h3>
         <p>{{infomation}}</p>
-        {% if len(notes) != 11 %}
+        {% if len(notes) != 11 and not notes%}
         <p><b>{{notes}}</b></p>
         {% endif %}
     </div> 
@@ -23,12 +23,10 @@
             <dt>开始</dt>
             {% if level <= 1 %}
             <dd><a href="{{url_for('modify')}}">增改信息</a></dd>
-            <dd>查看公示</dd>
+            <dd><a href="{{url_for('check')}}">查看公示</a></dd>
             {% elif level > 0 %}
-            <dd>审核信息</dd>
-            {% endif %}
-            {% if level == 2 %}
-            <dd>发布公告</dd>
+            <dd><a href="{{url_for('check')}}">查看公示</a></dd>
+            <dd><a href="{{url_for('apprv')}}">审核信息</a></dd>
             {% endif %}
         </dl>
     </div>

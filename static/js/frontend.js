@@ -32,15 +32,15 @@ function scrollSmoothly(s, t) {
 }
 
 function blinkSlogan(){
-    let text = ['我 |','我 们','我 们 的|','我 们 的 榜','我 们 的 榜 样 |','我 们 的 榜 样 !  ','我 们 的 榜 样 !|'];
+    let text = ['我 |','我 们','我 们|','我 们 的|','我 们 的','我 们 的 榜 |','我 们 的 榜 样 |','我 们 的 榜 样 ','我 们 的 榜 样 !  ','我 们 的 榜 样 !|'];
     let slogan = document.getElementById('slogantxt');
     let i = 0
     let tiny_t = 400;
     let timer = setInterval(() => {
         slogan.innerText = text[i] ;
         i++ ;
-        if (i==7){
-            i = 5;
+        if (i==10){
+            i = 8;
         }
     }, tiny_t)
 

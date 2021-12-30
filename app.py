@@ -277,6 +277,8 @@ def modify():
                         db.session.commit()
                 if new_reward:
                     for id in new_reward:
+                        if not id :
+                            continue
                         reward = Reward(
                             uid=session['uid'],
                             id=id,
@@ -438,3 +440,14 @@ def download():
     else :
         flash("请先登录哦~")
         return redirect('login')
+
+@app.route("/sce/honor")
+def honor():
+    return render_template("honor.html")
+
+@app.route("/sce/rule")
+def goodstu():
+    return render_template("goodstu.html")
+
+if __name__ == "__main__" :
+    app.run(host='0.0.0.0', port=5000) 

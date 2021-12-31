@@ -131,7 +131,10 @@ function beforeModify() {
         window.onbeforeunload = null;
         return true;
     }
-    else { return false; }
+    else {
+        window.alert("请检查标红处的数据是否填写错误。");
+        pwd.value = ''; return false;
+    }
 }
 
 function checkInfo(elem) {

@@ -23,7 +23,7 @@ nav {
 #top {
 	display: inline;
 	text-align: right;
-	margin-left: 60%;
+	margin-left: 52%;
 	line-height: 50px;
 }
 
@@ -146,4 +146,22 @@ footer {
 	color: rgb(125,125,125);
 	text-align: right;
 	width: 167px;
+}
+
+span.a{
+	display: inline-block;
+    margin: 0 15px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-color: rgba(200,200,200,0.3);
+    transition: 0.25s;
+    height: 1.3em;
+    color: #333333;
+    line-height: 1.35em;
+	backdrop-filter: blur(6.5px);
+	-webkit-backdrop-filter: blur(6.5px);
+	box-shadow: rgba(200, 200, 200, 0.8) 0px 2px 5px 0px;
+	-webkit-box-shadow: rgba(200, 200, 200, 0.8) 0px px 5px 0px;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
 }

@@ -36,7 +36,7 @@ function is012Code(obj) {
 
 
 // 专业年级班级下拉菜单动态调整
-function activeSelect() {
+function activeSelect(isS) {
 	let mj = document.getElementById('mj').value;
 	let yr = document.getElementById('yr');
 	let cl = document.getElementById('cl')
@@ -59,6 +59,12 @@ function activeSelect() {
 	else if (mj == 'acca') innerSelect(yr, cl, 18, 20, 1);
 	else if (mj == '%') {
 		cl.innerHTML = '';
+		let opc = document.createElement('option');
+		opc.value = '%';
+		opc.innerText = '全部';
+		cl.appendChild(opc);
+	}
+	if (isS == 1){
 		let opc = document.createElement('option');
 		opc.value = '%';
 		opc.innerText = '全部';

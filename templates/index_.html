@@ -14,7 +14,7 @@
     <div id='board'> 
         <h3>公告栏</h3>
         <p>{{infomation}}</p>
-        {% if len(notes) != 11 and not notes%}
+        {% if (len(notes) != 11) and (notes) %}
         <p><b>{{notes}}</b></p>
         {% endif %}
     </div> 

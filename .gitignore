@@ -116,4 +116,5 @@ dmypy.json
 
 res/
 .flaskenv
-scepy/temp.xls
+temp.xls
+

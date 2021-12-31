@@ -387,8 +387,7 @@ def apprv():
                 class_mates = db.session.query(User).filter(and_(
                     User.grClass.like(condition.year + '%'),
                     User.grClass.like('%' + condition.cl),
-                    User.major.like(condition.major),
-                    Info.checked.like(condition.checked)
+                    User.major.like(condition.major)
                 )).all()
                 class_mates2 = db.session.query(Info).filter(
                     Info.checked.like(condition.checked)

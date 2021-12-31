@@ -5,7 +5,7 @@
 <title>审核信息-学生综合素质评价微系统(SCE)</title>
 <link rel="stylesheet" href="../static/css/index.css">
 <link rel="stylesheet" href="../static/css/apprv.css">
-<script src="../static/js/reg.js">window.onload=activeSelect();</script>
+<script src="../static/js/reg.js">window.onload = activeSelect();</script>
 <script src="../static/js/apprv.js"></script>
 
 {% endblock head %}
@@ -21,6 +21,7 @@
     <form action="{{url_for("apprv")}}" method="post">
         <h3 id='tch'>筛选条件</h3>
         年级: {{condition.year}} &nbsp;&nbsp;&nbsp;&nbsp;
+        {% if session.get('level',None) == '2' %}
         专业:
         <select name="mj" id="mj" onchange="activeSelect(1);" class="infoinput" style="width: 9em;">
             <option value="%">全部</option>
@@ -43,7 +44,7 @@
             <option value="03">03</option>
             <option value="{{condition.cl}}" selected>{{majors.get(condition.cl,condition.cl)}}</option>
         </select> &nbsp;&nbsp;&nbsp;&nbsp;
-        审核状态: 
+        审核状态:
         <select name="ischeck" id="ischeck" class="infoinput" style="width: 9em;">
             <option value="%">全部</option>
             <option value="0">待班干审核</option>
@@ -51,15 +52,36 @@
             <option value="2">已完成审核</option>
             <option value="{{condition.checked}}" selected>{{status.get(condition.checked,condition.checked)}}</option>
         </select> &nbsp;&nbsp;&nbsp;&nbsp;
+        {% else %}
+        专业:
+        <select name="mj" id="mj" class="infoinput" style="width: 9em;">
+
+            <option value="{{session['major']}}" selected>{{majors.get(session['major'],'')}}</option>
+        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+        班级:
+        <select name="cl" id="cl" class="infoinput" style="width: 4.5em;">
+            <option value="{{session['grClass'][-2:]}}" selected>{{majors.get(condition.cl,condition.cl)}}</option>
+        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+        审核状态:
+        <select name="ischeck" id="ischeck" class="infoinput" style="width: 9em;">
+            <option value="%">全部</option>
+            <option value="0">待班干审核</option>
+            <option value="1">待导员审核</option>
+            <option value="2">已完成审核</option>
+            <option value="{{condition.checked}}" selected>{{status.get(condition.checked,condition.checked)}}</option>
+        </select> &nbsp;&nbsp;&nbsp;&nbsp;
+        {% endif %}
         <input type="submit" value="筛选" class="sbtn" style="width: 3.6em;">
     </form>
+
 </div>
 
 <div class="list">
     <form action="{{url_for('apprving')}}" method="post">
         <table class="table horizontal tch">
             <thead>
-                <td style="width: 50px;font-size: smaller;padding-right: 0px;padding-left: 0px;"><input type="checkbox" name="all" id="all">全选</td>
+                <td style="width: 50px;font-size: smaller;padding-right: 0px;padding-left: 0px;"><input type="checkbox"
+                        name="all" id="all">全选</td>
                 <td style="width: 4.2em;padding-right: 0px;padding-left: 0px;">专业班级</td>
                 <td style="padding-right: 0px;padding-left: 0px;">姓名</td>
                 <td style="padding-right: 0px;padding-left: 0px;">奖励分</td>
@@ -71,14 +93,19 @@
             <tbody>
                 {% for info in infos %}
 
-                <tr onmouseover="showList(this);" onmouseleave="unShowList(this);" style="padding-left: 0;padding-right: 0;">
-                    
+                <tr onmouseover="showList(this);" onmouseleave="unShowList(this);"
+                    style="padding-left: 0;padding-right: 0;">
+
                     {% if str(info.full.checked) == '2' %}
-                    <td style="width: 50px;font-size: smaller;padding-right: 0px;padding-left: 0px;"><input type="checkbox" name="{{info.uid}}c" id="{{info.uid}}c" class="se" value="2" checked></td>
+                    <td style="width: 50px;font-size: smaller;padding-right: 0px;padding-left: 0px;"><input
+                            type="checkbox" name="{{info.uid}}c" id="{{info.uid}}c" class="se" value="2" checked></td>
                     {% elif str(info.full.checked) == '1' %}
-                    <td style="width: 50px;font-size: smaller;padding-right: 0px;padding-left: 0px;"><input type="checkbox" name="{{info.uid}}c" id="{{info.uid}}c" class="se" value="1" checked></td>
-                    {% else  %}
-                    <td style="width: 50px;font-size: smaller;padding-right: 0px;padding-left: 0px;"><input type="checkbox" name="{{info.uid}}c" id="{{info.uid}}c" class="se" value="{{session['level']}}"></td>
+                    <td style="width: 50px;font-size: smaller;padding-right: 0px;padding-left: 0px;"><input
+                            type="checkbox" name="{{info.uid}}c" id="{{info.uid}}c" class="se" value="1" checked></td>
+                    {% else %}
+                    <td style="width: 50px;font-size: smaller;padding-right: 0px;padding-left: 0px;"><input
+                            type="checkbox" name="{{info.uid}}c" id="{{info.uid}}c" class="se"
+                            value="{{session['level']}}"></td>
                     {% endif %}
 
                     <td style="width: 4.2em;padding-right: 0px;padding-left: 0px;">{{info.mjcl}}</td>
@@ -87,7 +114,8 @@
                     <td style="padding-right: 0px;padding-left: 0px;">{{info.dis}}</td>
                     <td style="padding-right: 0px;padding-left: 0px;">{{info.all}}</td>
                     <td style="padding-right: 0px;padding-left: 0px;">{{info.statu}}</td>
-                    <td><input type="text" name="{{info.uid}}" id="{{info.uid}}" class="note infoinput" value="{{ info.note }}" ></td>
+                    <td><input type="text" name="{{info.uid}}" id="{{info.uid}}" class="note infoinput"
+                            value="{{ info.note }}"></td>
                 </tr>
                 <tr>
                     <td colspan="8" class="detail">

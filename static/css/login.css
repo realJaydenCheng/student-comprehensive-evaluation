@@ -153,10 +153,10 @@ span.a{
     margin: 0 15px;
     padding: 10px 12px;
     border-radius: 8px;
-    background-color: rgba(200,200,200,0.3);
+    background-color: rgba(200,200,200,0);
     transition: 0.25s;
     height: 1.3em;
-    color: #333333;
+    color: #555;
     line-height: 1.35em;
 	backdrop-filter: blur(6.5px);
 	-webkit-backdrop-filter: blur(6.5px);

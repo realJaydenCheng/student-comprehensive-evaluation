@@ -44,7 +44,7 @@ def creat_info_list(uids,User,Info,Reward) :
             for reward in rewards:
                 re_sum += reward.value
                 if type(re_note) != str :
-                    continue;
+                    continue
                 re_note += f"[{remove0(reward.value)}]{reward.note}, "
         else :
             re_note = ''

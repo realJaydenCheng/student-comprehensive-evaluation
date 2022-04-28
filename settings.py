@@ -1,7 +1,17 @@
+'''
+Author: Jayden Cheng
+Date: 2022-04-28 22:59:32
+LastEditors: Jayden Cheng
+LastEditTime: 2022-04-28 23:18:25
+FilePath: \Student_Comprehensive_Evaluation - 副本\settings.py
+Description: 
+
+Copyright (c) 2022 by Jayden Cheng, All Rights Reserved. 
+'''
 
 class Debug(object):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "mysql://root:000000@localhost/yj"
+    SQLALCHEMY_DATABASE_URI = "mysql://root:42289062awsdfG@localhost/sce_db"
     SQLALCHEMY_TRACK_MODIFICATIONS = 0
     SECRET_KEY = 'temp'
 

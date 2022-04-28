@@ -61,8 +61,8 @@
         <div class="row" style="width: 300px; height: auto;">
             <div class="col-sm-2" id="menulist" style="width: 300px;">
                 <a href="#" class="list-group-item active" onclick="loadPage('page1')">
-                    <h1>{{day_time}}好</h1>
-                    <p>欢迎{{levels[level]}}<strong>{{user_name}}</strong>使用学生综合素质评价微系统! </p>
+                    <h1>{{pack.day_time}}好</h1>
+                    <p>欢迎{{levels[pack.level]}}<strong>{{pack.user_name}}</strong>使用学生综合素质评价微系统! </p>
                 </a>
 
                 <a href="#" class="list-group-item" onclick="loadPage('page2')">
@@ -85,16 +85,16 @@
                 </a>
                 <div id="collapseTwo" class="collapse" data-parent="#accordion">
                     <div class="list-group-item">
-                    <p>权限: {{levels[level]}}{% if level == 1 or level == 0 %}</p>
+                    <p>权限: {{levels[pack.level]}}{% if pack.level == 1 or pack.level == 0 %}</p>
                     </div>
                     <div class="list-group-item">
-                    <p>个人信息状态: {{info_status}}</p>
+                    <p>个人信息状态: {{pack.info_status}}</p>
                     </div>
                     <div class="list-group-item">
-                        <p>班级已提交: {{submit_n}}份{%elif level == 2%}</p>
+                        <p>班级已提交: {{pack.submit_n}}份{%elif pack.level == 2%}</p>
                     </div>
                     <div class="list-group-item">
-                        <p>年级已提交: {{submit_n}}份{% endif %}</p>
+                        <p>年级已提交: {{pack.submit_n}}份{% endif %}</p>
                     </div>
                 </div>
             

@@ -91,16 +91,11 @@ class Reward(db.Model):
     def __getitem__(self, item):
         return getattr(self, item)
 
-
-@app.route('/')
-@app.route('/sce')
-@app.route('/sce/')
-@app.route('/sce/index')
-def index():
-    if session.get('is_log', 0):
-        day_time = get_day_time()
-        board_txt = open('./scepy/board.txt', 'r', encoding='utf-8').read()
-        level = eval(session['level'])
+class framework:
+    def __init__(self,session):
+        self.day_time = get_day_time()
+        self.infomation = open('./scepy/board.txt', 'r', encoding='utf-8').read()
+        self.level=eval(session['level'])
         info = Info.query.filter_by(uid=session.get('uid')).first()
         if info:
             info = dict(info)
@@ -123,15 +118,52 @@ def index():
             for user in users:
                 if Info.query.filter_by(uid=user.uid).first():
                     submit_n += 1
+        self.submit_n=submit_n
+        self.info_status=info_status
+        self.notes = notes
+        self.user_name = session.get('name','')
+
+@app.route('/')
+@app.route('/sce')
+@app.route('/sce/')
+@app.route('/sce/index')
+def index():
+    if session.get('is_log', 0):
+        # day_time = get_day_time()
+        # board_txt = open('./scepy/board.txt', 'r', encoding='utf-8').read()
+        # level = eval(session['level'])
+        # info = Info.query.filter_by(uid=session.get('uid')).first()
+        # if info:
+        #     info = dict(info)
+        # else:
+        #     info = {'checked': 0,'notes':''}
+        # info_status = status[info.get('checked')]
+        # notes = f'\n增改信息提示: \n{info["notes"]}\n'
+        # if session.get('level', 0) == '2':
+        #     gr = User.query.filter_by(uid=session.get('uid'))[0].grClass[:2]
+        #     users = db.session.query(User).filter(
+        #         User.grClass.like(gr + '%')).all()
+        #     submit_n = 0
+        #     for user in users:
+        #         if Info.query.filter_by(uid=user.uid).first():
+        #             submit_n += 1
+        # else:
+        #     gr = User.query.filter_by(uid=session.get('uid'))[0].grClass
+        #     users = db.session.query(User).filter(User.grClass == gr).all()
+        #     submit_n = 0
+        #     for user in users:
+        #         if Info.query.filter_by(uid=user.uid).first():
+        #             submit_n += 1
         return render_template(
             'index_.html',
-            day_time=day_time,
-            level=level,
-            infomation=board_txt,
-            submit_n=submit_n,
-            info_status=info_status,
-            notes = notes,
-            user_name = session.get('name','')
+            pack = framework(session)
+            # day_time=day_time,
+            # level=level,
+            # infomation=board_txt,
+            # submit_n=submit_n,
+            # info_status=info_status,
+            # notes = notes,
+            # user_name = session.get('name','')
         )
     else:
         return redirect(url_for('login'))
@@ -196,7 +228,8 @@ def reg():
 def usetting():
     if session.get('is_log' , None) :
         if request.method == 'GET' :
-            return render_template('usetting.html')
+            return render_template('usetting.html',
+            pack = framework(session))
         if request.method == 'POST' :
             user = User.query.filter_by(uid=session['uid']).first()
             if user.pwd == request.form.get('oldpwd','') :
@@ -205,7 +238,7 @@ def usetting():
                 flash("修改成功! ")
                 return redirect(url_for('index'))
             flash("原密码错误! ")
-            return render_template('usetting.html')
+            return render_template('usetting.html',)
 
 @app.route('/sce/license')
 def license():
@@ -230,7 +263,8 @@ def modify():
                 infos = dict(infos)
                 info_dict.update(infos)
             rewards = Reward.query.filter_by(uid=session['uid']).all()
-            return render_template('modify_.html', infomation=info_dict, rewards=rewards)
+            return render_template('modify_.html', infomation=info_dict, rewards=rewards,
+            pack = framework(session))
         if request.method == 'POST':
             if session.get('level', 0) == '2':
                 flash('辅导员无需填写信息! ')
@@ -308,7 +342,8 @@ def check():
                     User.grClass.like(session['grClass'][:2] + '%')).all()
                 if not class_mates:
                     flash("没有相关数据! ")
-                    return render_template("check_tch.html")
+                    return render_template("check_tch.html",
+            pack = framework(session))
                 class_mates = list(map(lambda x: x.uid, class_mates))
                 datas = creat_info_list(class_mates,User,Info,Reward)
                 creat_excel(DATA_PATH,EX_FILE,datas)
@@ -316,16 +351,19 @@ def check():
                 for info in infos:
                     user = User.query.filter_by(uid=info.uid).first()
                     info.mjcl = majors[user.major] + user.grClass
-                return render_template("check_tch.html", infos=infos, session=session, n=len(infos), condition=condition)
+                return render_template("check_tch.html", infos=infos, session=session, n=len(infos), condition=condition,
+            pack = framework(session))
             else:  # 查找符合条件的User对象，存入列表，交给output_infos()函数格式化输出。
                 class_mates = db.session.query(User).filter(
                     User.grClass == session["grClass"]).all()
                 if not class_mates:
                     flash("没有相关数据! ")
-                    return render_template("check_stu.html")
+                    return render_template("check_stu.html",
+            pack = framework(session))
                 class_mates = list(map(lambda x: x.uid, class_mates))
                 infos = output_infos(class_mates, Info, Reward, User)
-                return render_template("check_stu.html", infos=infos, session=session, n=len(infos))
+                return render_template("check_stu.html", infos=infos, session=session, n=len(infos),
+            pack = framework(session))
         elif request.method == "POST":
             if session.get("level", None) == "2":
                 condition = Conditions(
@@ -345,12 +383,14 @@ def check():
                 creat_excel(DATA_PATH,EX_FILE,datas)
                 if not class_mates:
                     flash("没有相关数据! ")
-                    return render_template("check_tch.html", infos=[], session=session, n=0, condition=condition)
+                    return render_template("check_tch.html", infos=[], session=session, n=0, condition=condition,
+            pack = framework(session))
                 infos = output_infos(class_mates, Info, Reward, User)
                 for info in infos:
                     user = User.query.filter_by(uid=info.uid).first()
                     info.mjcl = majors[user.major] + user.grClass
-                return render_template("check_tch.html", infos=infos, session=session, n=len(infos), condition=condition)
+                return render_template("check_tch.html", infos=infos, session=session, n=len(infos), condition=condition,
+            pack = framework(session))
             else:
                 flash("同学是不是哪里点错了捏？")
                 return redirect(url_for('index'))
@@ -369,11 +409,13 @@ def apprv():
                     User.grClass.like(session['grClass'][:2] + '%')).all()
                 if not class_mates:
                     flash("没有相关数据! ")
-                    return render_template('apprv_.html', infos=[], session=session, n=len([]), condition=condition)
+                    return render_template('apprv_.html', infos=[], session=session, n=len([]), condition=condition,
+            pack = framework(session))
                 class_mates = list(map(lambda x: x.uid, class_mates))
                 infos = output_infos(class_mates, Info, Reward, User)
                 infos = output_apprv(infos, Info, Reward, User, majors, status)
-                return render_template('apprv_.html', infos=infos, session=session, n=len(infos), condition=condition)
+                return render_template('apprv_.html', infos=infos, session=session, n=len(infos), condition=condition,
+            pack = framework(session))
             else:
                 flash("这是给辅导员和班干用的功能哦~")
                 return redirect(url_for('index'))
@@ -397,10 +439,12 @@ def apprv():
                     map(lambda x: x.uid, class_mates2)))
                 if not class_mates:
                     flash("没有相关数据! ")
-                    return render_template('apprv_.html', infos=[], session=session, n=len([]), condition=condition)
+                    return render_template('apprv_.html', infos=[], session=session, n=len([]), condition=condition,
+            pack = framework(session))
                 infos = output_infos(class_mates, Info, Reward, User)
                 infos = output_apprv(infos, Info, Reward, User, majors, status)
-                return render_template('apprv_.html', infos=infos, session=session, n=len(infos), condition=condition)
+                return render_template('apprv_.html', infos=infos, session=session, n=len(infos), condition=condition,
+            pack = framework(session))
             else:
                 flash("这是给辅导员和班干用的功能哦~")
                 return redirect(url_for('index'))

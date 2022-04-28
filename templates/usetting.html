@@ -1,7 +1,16 @@
-<!DOCTYPE html>
-<html>
+<!--
+ * @Author: Jayden Cheng
+ * @Date: 2022-04-28 22:59:36
+ * @LastEditors: Jayden Cheng
+ * @LastEditTime: 2022-04-29 00:19:05
+ * @FilePath: \Student_Comprehensive_Evaluation - 副本\templates\usetting.html
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by Jayden Cheng, All Rights Reserved. 
+-->
+{% extends '_features.html' %}
  
-<head>
+{% block head %}
     <meta charset="utf-8">
     <title>账户设置-学生综合素质评价微系统(SCE)</title>
     <link rel="icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">
@@ -11,22 +20,11 @@
     <script src='../static/js/md5.js'></script>
     <script src="../static/js/usetting.js"></script>
     <script src="../static/js/login.js"></script>
-    {% for message in get_flashed_messages() %}
-    {% if message %}
-    <script>
-        window.onload=function(){alert('{{ message }}')}
-    </script>
-    {% else %}
-    {% endif %}
-    {% endfor %}
-</head>
+    {% endblock head %}
 
-<body>
-    <nav>
-        <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px">
-        <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="{{url_for('login')}}">返回首页</a></span>
-    </nav>
-    <div class="main">
+
+    {% block main %}
+
         <h1>账户设置</h1>
         <div id="table">
             <form action="{{url_for('usetting')}}" method="post" onsubmit="return  beforeSubmit();">
@@ -97,12 +95,5 @@
             </form>
         </div>
 
-    </div>
-    <footer>
-        <a href="{{url_for('about')}}">关于&nbsp;</a>
-        &nbsp;|&nbsp;
-        <a href="{{url_for('license')}}">&nbsp;开放源代码协议: SAY NO TO SUICIDE PUBLIC LICENSE</a>
-    </footer>
-</body>
+        {% endblock main %}
 
-</html>

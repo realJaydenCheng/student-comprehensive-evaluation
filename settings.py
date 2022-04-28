@@ -1,7 +1,7 @@
 
 class Debug(object):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "mysql://root:42289062awsdfG@localhost/sce_db"
+    SQLALCHEMY_DATABASE_URI = "mysql://root:000000@localhost/yj"
     SQLALCHEMY_TRACK_MODIFICATIONS = 0
     SECRET_KEY = 'temp'
 

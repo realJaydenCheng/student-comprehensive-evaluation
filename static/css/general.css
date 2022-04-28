@@ -5,30 +5,61 @@ body {
     font-family: "等线" , "微软雅黑" , yahei;
 }
 
-nav {
+/* nav {
 	display: block;
 	height: 50px;
 	width: 1250px;
 	margin: 0 auto;
+} */
+/* #modify
+{
+    display: block;
+    width: 200px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 48px;
+    -webkit-border-radius: 48px;
+    margin-top: 10px;
 }
-
-#logo{
+#check
+{
+    display: block;
+    width: 200px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 48px;
+    -webkit-border-radius: 48px;
+    margin-top: 10px;
+}
+#apprv
+{
+    display: block;
+    width: 200px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 48px;
+    -webkit-border-radius: 48px;
+    margin-top: 10px;
+} */
+/* #logo{
 	float: left;
-}
+} */
 
-#top {
+/* #top {
 	display: block;
 	text-align: right;
 	float: right;
 	line-height: 50px;
 	margin-top: 14px;
-}
+} */
 
 .main{
-    margin: 100px auto 100px;
 	background-color: rgb(224, 229, 236);
-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
--webkit-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
+    box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
+    -webkit-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
 	border-radius: 43px;
 	-webkit-border-radius: 43px;
     width: 800px;
@@ -36,14 +67,14 @@ box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4
 	padding:40px;
 }
 
-h1{
+/* h1{
     margin: 0;
     border: 0;
     padding: 0;
     margin-bottom: 25px;
-    font-size: 37px;
-    font-weight: 550;
-}
+    font-size: 20px;
+    font-weight: 400;
+} */
 
 footer{
     margin-top: 100px;

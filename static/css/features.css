@@ -1,28 +1,67 @@
 main{
     display: block;
-    width: 1250px;
+    width: auto;
     height: fit-content;
-    margin: 0 auto;
+    /* margin: 0 auto; */
 }
 
-h1{
-    font-size: 42px;
-}
+/* h1{
+    font-size: 20px;
+} */
 
 div.main{
     display: block;
     float: right;
-    width: 800px;
+    width: auto;
     height: auto;
     min-height: 600px;
     background-color: rgb(224, 229, 236);
-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
--webkit-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
-border-radius: 48px;
--webkit-border-radius: 48px;
+    box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
+    -webkit-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4px 8px 0px;
+    border-radius: 48px;
+    -webkit-border-radius: 48px;
+    
 }
 
-div.feature{
+#modify
+{
+    display: block;
+    width: 150px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 48px;
+    -webkit-border-radius: 48px;
+    margin-top: 10px;
+}
+#check
+{
+    display: block;
+    width: 150px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 48px;
+    -webkit-border-radius: 48px;
+    margin-top: 10px;
+}
+#apprv
+{
+    display: block;
+    width: 150px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 48px;
+    -webkit-border-radius: 48px;
+    margin-top: 10px;
+}
+#top
+{
+    display: block;
+    margin-top: 10px;
+}
+/* div.feature{
     display: block;
     width: 200px;
     height: 76px;
@@ -37,13 +76,13 @@ box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px, rgb(255, 255, 255) -4px -4
     border-radius: 48px;
     -webkit-border-radius: 48px;
     margin-top: 150px;
-}
+} */
 
-div.feature:hover{
+/* div.feature:hover{
     background-color: rgb(220,220,220);
-}
+} */
 
-div.feature:active{
+/* div.feature:active{
     background-color: rgb(224, 229, 236);
 box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px inset, rgb(255, 255, 255) -4px -4px 8px 0px inset;
 -webkit-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px inset, rgb(255, 255, 255) -4px -4px 8px 0px inset;
@@ -51,7 +90,7 @@ border-radius: 48px;
 -webkit-border-radius: 48px;
 	border: 0;
     font-size: 21.5px;
-}
+} */
 
 
 aside{

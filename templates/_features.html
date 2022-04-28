@@ -1,47 +1,114 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <link rel="icon" href="../static/img/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../static/css/general.css">
-    <link rel="stylesheet" href="../static/css/features.css">
-    {% block head %}
-    <title>-学生综合素质评价微系统(SCE)</title>
-    {% endblock head %}
-    {% for message in get_flashed_messages() %}
-    {% if message %}
-    <script>
-        window.onload=function(){alert('{{ message }}')}
-    </script>
-    {% else %}
-    {% endif %}
-    {% endfor %}
-</head>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="../static/img/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../static/css/general.css">
+        <link rel="stylesheet" href="../static/css/features.css">
+
+        <link rel="stylesheet" href="../static/css/index.css">
+
+        <!-- <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script> -->
+
+	    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        {% block head %}
+        <title>-学生综合素质评价微系统(SCE)</title>
+        {% endblock head %}
+        {% for message in get_flashed_messages() %}
+        {% if message %}
+        <script>
+            window.onload=function(){alert('{{ message }}')}
+        </script>
+        {% else %}
+        {% endif %}
+        {% endfor %}
+    </head>
 
 
 <body>
-    <nav>
-        <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px" id='logo'>
-        <span id="top">
-            学生综合素质评价微系统&nbsp;&nbsp;|&nbsp;&nbsp;欢迎您: <i><a href="{{url_for('usetting')}}">{{session.get('name',None)}}</a></i>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="{{url_for('index')}}">返回首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{url_for('login')}}?exit=1">退出登录</a>
-        </span>
-        <span id="top"></span>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px" id='logo'>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><div class="nav-item" id="modify" onclick="location.href='{{url_for('modify')}}';">增 加 信 息</div></li>
+                <li><div class="nav-item" id="check" onclick="location.href='{{url_for('check')}}';">查 看 公 示</div></li>
+                <li><div class="nav-item" id="apprv" onclick="location.href='{{url_for('apprv')}}';">审 核 信 息</div></li>
+                <li style="float: right;margin-top: 10px;">
+                    <span id="top">
+                        学生综合素质评价微系统&nbsp;&nbsp;|&nbsp;&nbsp;欢迎您: <i><a href="{{url_for('usetting')}}">{{session.get('name',None)}}</a></i>&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="{{url_for('index')}}">返回首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{url_for('login')}}?exit=1">退出登录</a>
+                    </span>
+                </li>
+                <li><span id="top"></span></li>
+            </ul>
+        </div>
+        </div>
     </nav>
 
-    <main>
+        <div class="row" style="width: 300px; height: auto;">
+            <div class="col-sm-2" id="menulist" style="width: 300px;">
+                <a href="#" class="list-group-item active" onclick="loadPage('page1')">
+                    <h1>{{day_time}}好</h1>
+                    <p>欢迎{{levels[level]}}<strong>{{user_name}}</strong>使用学生综合素质评价微系统! </p>
+                </a>
+
+                <a href="#" class="list-group-item" onclick="loadPage('page2')">
+                    <h3>公告栏</h3>
+                </a>
+                <a class="list-group-item" data-toggle="collapse" href="#collapseOne">
+                    <h3>开始</h3>
+                </a>
+                <div id="collapseOne" class="collapse" data-parent="#accordion">
+                    <div class="list-group-item">
+                    <p>增改信息</p>
+                    </div>
+                    <div class="list-group-item">
+                    <p>查看公示</p>
+                    </div>
+                </div>
+
+                <a class="list-group-item" data-toggle="collapse" href="#collapseTwo">
+                    <h3>讯息速览</h3>
+                </a>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <div class="list-group-item">
+                    <p>权限: {{levels[level]}}{% if level == 1 or level == 0 %}</p>
+                    </div>
+                    <div class="list-group-item">
+                    <p>个人信息状态: {{info_status}}</p>
+                    </div>
+                    <div class="list-group-item">
+                        <p>班级已提交: {{submit_n}}份{%elif level == 2%}</p>
+                    </div>
+                    <div class="list-group-item">
+                        <p>年级已提交: {{submit_n}}份{% endif %}</p>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+
+    <main style="position:absolute; left: 400px; top: 100px;">
         <div class="main">
             {% block main %}
             {% endblock main %}
         </div>
-        <aside>
-            <div class="feature" id="modify" onclick="location.href='{{url_for('modify')}}';">增 改 信 息</div>
-            <div class="feature" id="check" onclick="location.href='{{url_for('check')}}';">查 看 公 示</div>
-            <div class="feature" id="apprv" onclick="location.href='{{url_for('apprv')}}';">审 核 信 息</div>
-        </aside>
-    </main>
+    </main>   
+
+
     <footer>
         <a href="{{url_for('about')}}">关于&nbsp;</a>
         &nbsp;|&nbsp;

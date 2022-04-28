@@ -12,7 +12,8 @@ from scepy.features import check_modify, get_day_time, tran_reward
 from scepy.login import check_login_form
 from scepy.reg import check_reg_form
 from scepy.check import output_infos, output_apprv, Conditions, remove0
-from scepy.download import creat_excel, creat_info_list
+from scepy.download import creat_excel ,creat_info_list
+
 
 DATA_PATH = "./scepy/"
 EX_FILE = "temp.xls"
@@ -46,9 +47,8 @@ class User(db.Model):
     pwd = db.Column(db.CHAR(32), nullable=0)
     level = db.Column(db.CHAR(1), nullable=0, default='0')
 
-    @staticmethod
-    def keys():
-        return 'uid', 'name', 'major', 'grClass', 'pwd', 'level'
+    def keys(self):
+        return ('uid', 'name', 'major', 'grClass', 'pwd', 'level')
 
     def __getitem__(self, item):
         return getattr(self, item)
@@ -71,9 +71,8 @@ class Info(db.Model):
     checked = db.Column(db.INT, nullable=0, default=0)
     notes = db.Column(db.VARCHAR(200), nullable=1)
 
-    @staticmethod
-    def keys():
-        return 'uid', 'job', 'mor', 'gpa', 'cet', 'c1', 'c2', 'my', 'ld', 'dis', 'low', 'cre', 'checked', 'notes'
+    def keys(self):
+        return ('uid', 'job', 'mor', 'gpa', 'cet', 'c1', 'c2', 'my', 'ld', 'dis', 'low', 'cre', 'checked', 'notes')
 
     def __getitem__(self, item):
         return getattr(self, item)
@@ -86,14 +85,14 @@ class Reward(db.Model):
     note = db.Column(db.VARCHAR(50), nullable=1)
     value = db.Column(db.DECIMAL(5, 4), nullable=1)
 
-    @staticmethod
-    def keys():
-        return 'id', 'uid', 'note', 'value'
+    def keys(self):
+        return ('id', 'uid', 'note', 'value')
 
     def __getitem__(self, item):
         return getattr(self, item)
 
 
+@app.route('/')
 @app.route('/sce')
 @app.route('/sce/')
 @app.route('/sce/index')
@@ -106,7 +105,7 @@ def index():
         if info:
             info = dict(info)
         else:
-            info = {'checked': 0, 'notes': ''}
+            info = {'checked': 0,'notes':''}
         info_status = status[info.get('checked')]
         notes = f'\n增改信息提示: \n{info["notes"]}\n'
         if session.get('level', 0) == '2':
@@ -131,8 +130,8 @@ def index():
             infomation=board_txt,
             submit_n=submit_n,
             info_status=info_status,
-            notes=notes,
-            user_name=session.get('name', '')
+            notes = notes,
+            user_name = session.get('name','')
         )
     else:
         return redirect(url_for('login'))
@@ -193,22 +192,20 @@ def reg():
             flash('注册信息填写有误，请检查后重试。')
             return redirect(url_for('reg'))
 
-
-@app.route('/sce/usetting', methods=['POST', 'GET'])
+@app.route('/sce/usetting' , methods=['POST','GET'])
 def usetting():
-    if session.get('is_log', None):
-        if request.method == 'GET':
+    if session.get('is_log' , None) :
+        if request.method == 'GET' :
             return render_template('usetting.html')
-        if request.method == 'POST':
+        if request.method == 'POST' :
             user = User.query.filter_by(uid=session['uid']).first()
-            if user.pwd == request.form.get('oldpwd', ''):
+            if user.pwd == request.form.get('oldpwd','') :
                 user.pwd = request.form['newpwd']
                 db.session.commit()
                 flash("修改成功! ")
                 return redirect(url_for('index'))
             flash("原密码错误! ")
             return render_template('usetting.html')
-
 
 @app.route('/sce/license')
 def license():
@@ -281,7 +278,7 @@ def modify():
                         db.session.commit()
                 if new_reward:
                     for id in new_reward:
-                        if not id:
+                        if not id :
                             continue
                         reward = Reward(
                             uid=session['uid'],
@@ -313,14 +310,13 @@ def check():
                     flash("没有相关数据! ")
                     return render_template("check_tch.html")
                 class_mates = list(map(lambda x: x.uid, class_mates))
-                datas = creat_info_list(class_mates, User, Info, Reward)
-                creat_excel(DATA_PATH, EX_FILE, datas)
+                datas = creat_info_list(class_mates,User,Info,Reward)
+                creat_excel(DATA_PATH,EX_FILE,datas)
                 infos = output_infos(class_mates, Info, Reward, User)
                 for info in infos:
                     user = User.query.filter_by(uid=info.uid).first()
                     info.mjcl = majors[user.major] + user.grClass
-                return render_template("check_tch.html", infos=infos, session=session, n=len(infos),
-                                       condition=condition)
+                return render_template("check_tch.html", infos=infos, session=session, n=len(infos), condition=condition)
             else:  # 查找符合条件的User对象，存入列表，交给output_infos()函数格式化输出。
                 class_mates = db.session.query(User).filter(
                     User.grClass == session["grClass"]).all()
@@ -345,8 +341,8 @@ def check():
                     User.major.like(condition.major)).all()
                 class_mates = list(set(map(lambda x: x.uid, class_mates)) & set(
                     map(lambda x: x.uid, class_mates2)))
-                datas = creat_info_list(class_mates, User, Info, Reward)
-                creat_excel(DATA_PATH, EX_FILE, datas)
+                datas = creat_info_list(class_mates,User,Info,Reward)
+                creat_excel(DATA_PATH,EX_FILE,datas)
                 if not class_mates:
                     flash("没有相关数据! ")
                     return render_template("check_tch.html", infos=[], session=session, n=0, condition=condition)
@@ -354,8 +350,7 @@ def check():
                 for info in infos:
                     user = User.query.filter_by(uid=info.uid).first()
                     info.mjcl = majors[user.major] + user.grClass
-                return render_template("check_tch.html", infos=infos, session=session, n=len(infos),
-                                       condition=condition)
+                return render_template("check_tch.html", infos=infos, session=session, n=len(infos), condition=condition)
             else:
                 flash("同学是不是哪里点错了捏？")
                 return redirect(url_for('index'))
@@ -423,7 +418,7 @@ def apprving():
                 if uid[-1] == 'c':
                     continue
                 info = Info.query.filter_by(uid=uid).first()
-                info.checked = request.form.get(uid + 'c', 0)
+                info.checked = request.form.get(uid+'c', 0)
                 info.notes = request.form.get(uid, 0)
             db.session.commit()
             return redirect(url_for('apprv'))
@@ -434,29 +429,25 @@ def apprving():
         flash("请先登录~")
         return redirect(url_for('login'))
 
-
 @app.route('/sce/download')
 def download():
     if session.get('is_log', 0) == 1:
         if session.get('level', None) == '2':
-            return send_file(DATA_PATH + EX_FILE, as_attachment=1, attachment_filename=str(int(time())) + '.xls')
-        else:
+            return send_file(DATA_PATH+EX_FILE,as_attachment=1,attachment_filename= str(int(time()))+'.xls' )
+        else :
             flash("同学是不是哪点错了捏？")
             return redirect('index')
-    else:
+    else :
         flash("请先登录哦~")
         return redirect('login')
-
 
 @app.route("/sce/honor")
 def honor():
     return render_template("honor.html")
 
-
 @app.route("/sce/rule")
 def goodstu():
     return render_template("goodstu.html")
 
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__" :
+    app.run(host='0.0.0.0', port=5000) 

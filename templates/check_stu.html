@@ -6,38 +6,33 @@
 <link rel="stylesheet" href="../static/css/index.css">
 <link rel="stylesheet" href="../static/css/check.css">
 
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 {% endblock head %}
 
 {% block main %}
 
-<h1>查看公示</h1>
-
-<div class="info">
-    <h3>
-        班级: {{majors[session['major']]}}{{session['grClass']}}
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        已提交人数: {{n}}
-    </h3>
-</div>
-
-<div id="list">
-    <table class="table horizontal">
-        <thead>
-            <td style="width: 5.5em;">姓名</td>
-            <td>思德</td>
-            <td style="width: 3.5em;">绩点分</td>
-            <td>外语</td>
-            <td>体育</td>
-            <td>美育</td>
-            <td>劳动</td>
-            <td>素拓</td>
-            <td>处罚</td>
-            <td>总分</td>
-            <td>排名</td>
-            <td style="width: 35em;">素拓备注</td>
-        </thead>
-        <tbody>
-            {% for info in infos %}
+<table class="table table-hover" style="width: 800px;">
+	<h1>查看公示</h1>
+	<thead>
+        <td style="width: 5.5em;">姓名</td>
+        <td>思德</td>
+        <td style="width: 3.5em;">绩点分</td>
+        <td>外语</td>
+        <td>体育</td>
+        <td>美育</td>
+        <td>劳动</td>
+        <td>素拓</td>
+        <td>处罚</td>
+        <td>总分</td>
+        <td>排名</td>
+        <td style="width: 35em;">素拓备注</td>
+    </thead>
+	<tbody>
+		{% for info in infos %}
             <tr>
                 <td>{{info.name}}</td>
                 <td>{{info.mor}}</td>
@@ -50,11 +45,11 @@
                 <td>{{info.dis}}</td>
                 <td>{{info.all}}</td>
                 <td>{{info.index }}</td>
-                <td>{{info.note}}</td>
+                <td><textarea class="form-control" rows="1">{{info.note}}</textarea></td>
             </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        {% endfor %}
+	</tbody>
+</table>
 </div>
 
 {% endblock main %}

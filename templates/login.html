@@ -4,11 +4,13 @@
 <head>
     <meta charset="utf-8">
     <title>登录-学生综合素质评价微系统(SCE)</title>
-    <link rel="icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="../static/img/favicon.ico" mce_href="../static/img/favicon.ico" type="image/x-icon">  
+    <link rel="icon" href="../static/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="../static/">
     <script src="../static/js/md5.js"></script>
     <script src="../static/js/login.js"></script>
+    
     {% for message in get_flashed_messages() %}
     {% if message %}
     <script>
@@ -22,11 +24,15 @@
 <body>
     <nav>
         <img src="../static/img/logo.png" alt="学生综合素质评价微系统" title="学生综合素质评价微系统" width="142px">
-        <span id="top">学生综合素质评价微系统&nbsp;|&nbsp;<a href="{{url_for('honor')}}">风采展示</a>&nbsp;|&nbsp;<a href="{{url_for('reg')}}">用户注册</a></span>
+        <span id="top">
+            学生综合素质评价微系统&nbsp;|
+            <a href="{{url_for('honor')}}"><span class='a'>风采展示</span></a>|
+            <a href="{{url_for('reg')}}"><span class='a'>用户注册</span></a>
+        </span>
     </nav>
     <div id="main">
         <div id="slogan">
-            <span class="slogan">打通数据串联的</span>
+            <span class="slogan">打通学生工作的</span>
             <span class="slogan">“最后一公里”</span>
             <span class="slogan">学生综合素质评价微系统</span>
         </div>
@@ -42,7 +48,7 @@
                             <input type="text" onchange="is012Code(document.getElementById('codetxt').value)" class="info" name="codetxt" placeholder="请输入学号" id="codetxt">
                         </td>
                         <td class="tips" id="uidtip">
-                            请输入012开头的13位学号。
+                            请输入'012'开头的13位学号。
                         </td>
                     </tr>
                     <tr>

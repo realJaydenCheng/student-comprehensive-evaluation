@@ -6,7 +6,7 @@ h1 {
 
 body {
 	margin: 0;
-	background-image: url(../img/login.jpeg);
+	background-image: url(../img/login.png);
 	background-size: cover;
 	color: #333;
 	font-family: "等线","微软雅黑","黑体";
@@ -51,15 +51,18 @@ nav {
 
 span.slogan {
 	display: block;
-	font-size: 37px;
-	height: 60px;
+	font-size: 50px;
+	height: 70px;
+	font-weight: 900;
+	-webkit-text-stroke:0.1px #fff;
+	font-family: "微软雅黑","黑体";
 }
 
 #log {
 	width: 425px;
 	padding: 25px;
 	margin-left: 760px;
-	margin-top: 240px;
+	margin-top: 180px;
 }
 
 input {

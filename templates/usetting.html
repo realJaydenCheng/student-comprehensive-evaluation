@@ -34,7 +34,7 @@
                             <div class="infotext">学号：</div>
                         </td>
                         <td>
-                            <input type="text" name="codetxt" id="code" class="form-control" size="30px" value="{{session['uid']}}" readonly />
+                            <input type="text" name="codetxt" id="code" class="info" size="30px" value="{{session['uid']}}" readonly />
                         </td>
                     </tr>
                     <tr>
@@ -42,7 +42,7 @@
                             <div class="infotext" id="codetip"> 姓名：</div>
                         </td>
                         <td>
-                            <input type="text" name="nametxt" class="form-control" size="30px" id="name" value="{{session['name']}}" readonly />
+                            <input type="text" name="nametxt" class="info" size="30px" id="name" value="{{session['name']}}" readonly />
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@
                             <div class="infotext">专业班级：</div>
                         </td>
                         <td>
-                            <input type="text" name="grclass" class="form-control" size="30px" id="grclass" value="{{majors[session['major']]+session['grClass']}}" readonly />
+                            <input type="text" name="grclass" class="info" size="30px" id="grclass" value="{{majors[session['major']]+session['grClass']}}" readonly />
                         </td>
                     </tr>
                     <tr>
@@ -58,7 +58,7 @@
                             <div class="infotext">旧密码：</div>
                         </td>
                         <td>
-                            <input type='password' name="oldpwd" id="oldpwd" class="form-control" size="30px" onchange="check8(this);" />
+                            <input type='password' name="oldpwd" id="oldpwd" class="info" size="30px" onchange="check8(this);" />
                         </td>
                         <td class="tips" id="pwdtip1">
                             请输入您现在的密码。
@@ -69,7 +69,7 @@
                             <div class="infotext">新密码：</div>
                         </td>
                         <td>
-                            <input type='password' name="newpwd" id="newpwd" class="form-control" size="30px"
+                            <input type='password' name="newpwd" id="newpwd" class="info" size="30px"
                                 onchange="checkPwd()" />
                         </td>
                         <td class="tips" id="pwdtip2">
@@ -81,7 +81,7 @@
                             <div class="infotext">确认密码：</div>
                         </td>
                         <td>
-                            <input type='password' id="pwd2" class="form-control" size="30px" onchange="checkPwd()" />
+                            <input type='password' id="pwd2" class="info" size="40px" onchange="checkPwd()" />
                         </td>
                         <td class="tips" id="pwdtip3">
                             请再次输入密码确保无误。

@@ -93,7 +93,7 @@
             <tbody>
                 {% for info in infos %}
 
-                <tr onmouseover="showList(this);" onmouseleave="unShowList(this);"
+                <tr onclick="showList(this);" onmouseleave="unShowList(this);"
                     style="padding-left: 0;padding-right: 0;">
 
                     {% if str(info.full.checked) == '2' %}

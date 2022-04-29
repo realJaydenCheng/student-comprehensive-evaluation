@@ -1,7 +1,7 @@
 div#apprv{
     background-color: rgb(224, 229, 236);
-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px inset, rgb(255, 255, 255) -4px -4px 8px 0px inset;
--webkit-box-shadow: rgba(163, 177, 198, 0.5) 4px 4px 8px 0px inset, rgb(255, 255, 255) -4px -4px 8px 0px inset;
+box-shadow: rgba(245, 249, 255, 0.5) 4px 4px 8px 0px inset, rgb(255, 255, 255) -4px -4px 8px 0px inset;
+-webkit-box-shadow: rgba(230, 240, 255, 0.5) 4px 4px 8px 0px inset, rgb(255, 255, 255) -4px -4px 8px 0px inset;
 border-radius: 48px;
 -webkit-border-radius: 48px;
     font-size: 21.5px;
